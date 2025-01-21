@@ -4021,11 +4021,19 @@
   "project": {
     "version": "1.0.0",
     "restore": {
+<<<<<<< HEAD
       "projectUniqueName": "C:\\Users\\boris\\OneDrive\\Рабочий стол\\git_test\\git_test\\api_for_kursach\\api_for_kursach.csproj",
       "projectName": "api_for_kursach",
       "projectPath": "C:\\Users\\boris\\OneDrive\\Рабочий стол\\git_test\\git_test\\api_for_kursach\\api_for_kursach.csproj",
       "packagesPath": "C:\\Users\\boris\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\boris\\OneDrive\\Рабочий стол\\git_test\\git_test\\api_for_kursach\\obj\\",
+=======
+      "projectUniqueName": "C:\\Users\\boris\\source\\repos\\api_for_kursach\\api_for_kursach\\api_for_kursach.csproj",
+      "projectName": "api_for_kursach",
+      "projectPath": "C:\\Users\\boris\\source\\repos\\api_for_kursach\\api_for_kursach\\api_for_kursach.csproj",
+      "packagesPath": "C:\\Users\\boris\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\boris\\source\\repos\\api_for_kursach\\api_for_kursach\\obj\\",
+>>>>>>> ad68ff72a590d773023af271ab2a3ab186896ac0
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\boris\\AppData\\Roaming\\NuGet\\NuGet.Config",

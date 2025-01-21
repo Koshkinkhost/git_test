@@ -1,8 +1,14 @@
 {
   "version": 2,
+<<<<<<< HEAD
   "dgSpecHash": "3cij2502lr7kCA2cPZ+6lDk158bWx2pCilLvovx4mdq1Gi97fkbPgMzT09xjMao3WA+yQ8Ll5I8YAMzGYWwHcg==",
   "success": true,
   "projectFilePath": "C:\\Users\\boris\\OneDrive\\Рабочий стол\\git_test\\git_test\\api_for_kursach\\api_for_kursach.csproj",
+=======
+  "dgSpecHash": "f8uX0W72NXJdWqLB+ckTJhIbm+W0DgPY824rL2YLZjqbgMXUXMY3krtLQwj8qu6trCgo45VKe97R6Fd9vmHs2g==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\boris\\source\\repos\\api_for_kursach\\api_for_kursach\\api_for_kursach.csproj",
+>>>>>>> ad68ff72a590d773023af271ab2a3ab186896ac0
   "expectedPackageFiles": [
     "C:\\Users\\boris\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\boris\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",
