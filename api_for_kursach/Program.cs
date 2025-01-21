@@ -1,7 +1,7 @@
 using api_for_kursach.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
-//немного измененная версия
+//змененная версия 14:28
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddMvc();
