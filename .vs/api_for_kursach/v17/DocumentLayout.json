@@ -1,49 +1,49 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\boris\\source\\repos\\api_for_kursach\\",
+  "WorkspaceRootPath": "C:\\Users\\boris\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\git_test\\git_test\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{57ED67BF-7B4E-4683-BB69-F7B77D5D9607}|api_for_kursach\\api_for_kursach.csproj|c:\\users\\boris\\source\\repos\\api_for_kursach\\api_for_kursach\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{57ED67BF-7B4E-4683-BB69-F7B77D5D9607}|api_for_kursach\\api_for_kursach.csproj|solutionrelative:api_for_kursach\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{57ED67BF-7B4E-4683-BB69-F7B77D5D9607}|api_for_kursach\\api_for_kursach.csproj|C:\\Users\\boris\\source\\repos\\api_for_kursach\\api_for_kursach\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{57ED67BF-7B4E-4683-BB69-F7B77D5D9607}|api_for_kursach\\api_for_kursach.csproj|C:\\Users\\boris\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\git_test\\git_test\\api_for_kursach\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{57ED67BF-7B4E-4683-BB69-F7B77D5D9607}|api_for_kursach\\api_for_kursach.csproj|solutionrelative:api_for_kursach\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{57ED67BF-7B4E-4683-BB69-F7B77D5D9607}|api_for_kursach\\api_for_kursach.csproj|C:\\Users\\boris\\source\\repos\\api_for_kursach\\api_for_kursach\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "AbsoluteMoniker": "D:0:0:{57ED67BF-7B4E-4683-BB69-F7B77D5D9607}|api_for_kursach\\api_for_kursach.csproj|c:\\users\\boris\\onedrive\\\u0440\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\git_test\\git_test\\api_for_kursach\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{57ED67BF-7B4E-4683-BB69-F7B77D5D9607}|api_for_kursach\\api_for_kursach.csproj|solutionrelative:api_for_kursach\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{57ED67BF-7B4E-4683-BB69-F7B77D5D9607}|api_for_kursach\\api_for_kursach.csproj|C:\\Users\\boris\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\git_test\\git_test\\api_for_kursach\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{57ED67BF-7B4E-4683-BB69-F7B77D5D9607}|api_for_kursach\\api_for_kursach.csproj|solutionrelative:api_for_kursach\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{57ED67BF-7B4E-4683-BB69-F7B77D5D9607}|api_for_kursach\\api_for_kursach.csproj|C:\\Users\\boris\\source\\repos\\api_for_kursach\\api_for_kursach\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "AbsoluteMoniker": "D:0:0:{57ED67BF-7B4E-4683-BB69-F7B77D5D9607}|api_for_kursach\\api_for_kursach.csproj|C:\\Users\\boris\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\git_test\\git_test\\api_for_kursach\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{57ED67BF-7B4E-4683-BB69-F7B77D5D9607}|api_for_kursach\\api_for_kursach.csproj|solutionrelative:api_for_kursach\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{57ED67BF-7B4E-4683-BB69-F7B77D5D9607}|api_for_kursach\\api_for_kursach.csproj|C:\\Users\\boris\\source\\repos\\api_for_kursach\\api_for_kursach\\viewmodels\\registrationresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{57ED67BF-7B4E-4683-BB69-F7B77D5D9607}|api_for_kursach\\api_for_kursach.csproj|C:\\Users\\boris\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\git_test\\git_test\\api_for_kursach\\viewmodels\\registrationresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{57ED67BF-7B4E-4683-BB69-F7B77D5D9607}|api_for_kursach\\api_for_kursach.csproj|solutionrelative:api_for_kursach\\viewmodels\\registrationresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{57ED67BF-7B4E-4683-BB69-F7B77D5D9607}|api_for_kursach\\api_for_kursach.csproj|C:\\Users\\boris\\source\\repos\\api_for_kursach\\api_for_kursach\\models\\artist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{57ED67BF-7B4E-4683-BB69-F7B77D5D9607}|api_for_kursach\\api_for_kursach.csproj|C:\\Users\\boris\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\git_test\\git_test\\api_for_kursach\\models\\artist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{57ED67BF-7B4E-4683-BB69-F7B77D5D9607}|api_for_kursach\\api_for_kursach.csproj|solutionrelative:api_for_kursach\\models\\artist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{57ED67BF-7B4E-4683-BB69-F7B77D5D9607}|api_for_kursach\\api_for_kursach.csproj|C:\\Users\\boris\\source\\repos\\api_for_kursach\\api_for_kursach\\models\\applicontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{57ED67BF-7B4E-4683-BB69-F7B77D5D9607}|api_for_kursach\\api_for_kursach.csproj|C:\\Users\\boris\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\git_test\\git_test\\api_for_kursach\\models\\applicontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{57ED67BF-7B4E-4683-BB69-F7B77D5D9607}|api_for_kursach\\api_for_kursach.csproj|solutionrelative:api_for_kursach\\models\\applicontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{57ED67BF-7B4E-4683-BB69-F7B77D5D9607}|api_for_kursach\\api_for_kursach.csproj|C:\\Users\\boris\\source\\repos\\api_for_kursach\\api_for_kursach\\viewmodels\\loginviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{57ED67BF-7B4E-4683-BB69-F7B77D5D9607}|api_for_kursach\\api_for_kursach.csproj|C:\\Users\\boris\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\git_test\\git_test\\api_for_kursach\\viewmodels\\loginviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{57ED67BF-7B4E-4683-BB69-F7B77D5D9607}|api_for_kursach\\api_for_kursach.csproj|solutionrelative:api_for_kursach\\viewmodels\\loginviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{57ED67BF-7B4E-4683-BB69-F7B77D5D9607}|api_for_kursach\\api_for_kursach.csproj|C:\\Users\\boris\\source\\repos\\api_for_kursach\\api_for_kursach\\viewmodels\\registrationrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{57ED67BF-7B4E-4683-BB69-F7B77D5D9607}|api_for_kursach\\api_for_kursach.csproj|C:\\Users\\boris\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\git_test\\git_test\\api_for_kursach\\viewmodels\\registrationrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{57ED67BF-7B4E-4683-BB69-F7B77D5D9607}|api_for_kursach\\api_for_kursach.csproj|solutionrelative:api_for_kursach\\viewmodels\\registrationrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{57ED67BF-7B4E-4683-BB69-F7B77D5D9607}|api_for_kursach\\api_for_kursach.csproj|C:\\Users\\boris\\source\\repos\\api_for_kursach\\api_for_kursach\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{57ED67BF-7B4E-4683-BB69-F7B77D5D9607}|api_for_kursach\\api_for_kursach.csproj|C:\\Users\\boris\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\git_test\\git_test\\api_for_kursach\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{57ED67BF-7B4E-4683-BB69-F7B77D5D9607}|api_for_kursach\\api_for_kursach.csproj|solutionrelative:api_for_kursach\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{57ED67BF-7B4E-4683-BB69-F7B77D5D9607}|api_for_kursach\\api_for_kursach.csproj|C:\\Users\\boris\\source\\repos\\api_for_kursach\\api_for_kursach\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "AbsoluteMoniker": "D:0:0:{57ED67BF-7B4E-4683-BB69-F7B77D5D9607}|api_for_kursach\\api_for_kursach.csproj|C:\\Users\\boris\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\git_test\\git_test\\api_for_kursach\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{57ED67BF-7B4E-4683-BB69-F7B77D5D9607}|api_for_kursach\\api_for_kursach.csproj|solutionrelative:api_for_kursach\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     }
   ],
@@ -54,15 +54,15 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 8,
+          "SelectedChildIndex": 10,
           "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 6,
               "Title": "AppliContext.cs",
-              "DocumentMoniker": "C:\\Users\\boris\\source\\repos\\api_for_kursach\\api_for_kursach\\Models\\AppliContext.cs",
+              "DocumentMoniker": "C:\\Users\\boris\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\git_test\\git_test\\api_for_kursach\\Models\\AppliContext.cs",
               "RelativeDocumentMoniker": "api_for_kursach\\Models\\AppliContext.cs",
-              "ToolTip": "C:\\Users\\boris\\source\\repos\\api_for_kursach\\api_for_kursach\\Models\\AppliContext.cs",
+              "ToolTip": "C:\\Users\\boris\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\git_test\\git_test\\api_for_kursach\\Models\\AppliContext.cs",
               "RelativeToolTip": "api_for_kursach\\Models\\AppliContext.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAuwAUAAAAbAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -72,9 +72,9 @@
               "$type": "Document",
               "DocumentIndex": 7,
               "Title": "LoginViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\boris\\source\\repos\\api_for_kursach\\api_for_kursach\\ViewModels\\LoginViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\boris\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\git_test\\git_test\\api_for_kursach\\ViewModels\\LoginViewModel.cs",
               "RelativeDocumentMoniker": "api_for_kursach\\ViewModels\\LoginViewModel.cs",
-              "ToolTip": "C:\\Users\\boris\\source\\repos\\api_for_kursach\\api_for_kursach\\ViewModels\\LoginViewModel.cs",
+              "ToolTip": "C:\\Users\\boris\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\git_test\\git_test\\api_for_kursach\\ViewModels\\LoginViewModel.cs",
               "RelativeToolTip": "api_for_kursach\\ViewModels\\LoginViewModel.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAqAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -84,9 +84,9 @@
               "$type": "Document",
               "DocumentIndex": 8,
               "Title": "RegistrationRequest.cs",
-              "DocumentMoniker": "C:\\Users\\boris\\source\\repos\\api_for_kursach\\api_for_kursach\\ViewModels\\RegistrationRequest.cs",
+              "DocumentMoniker": "C:\\Users\\boris\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\git_test\\git_test\\api_for_kursach\\ViewModels\\RegistrationRequest.cs",
               "RelativeDocumentMoniker": "api_for_kursach\\ViewModels\\RegistrationRequest.cs",
-              "ToolTip": "C:\\Users\\boris\\source\\repos\\api_for_kursach\\api_for_kursach\\ViewModels\\RegistrationRequest.cs",
+              "ToolTip": "C:\\Users\\boris\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\git_test\\git_test\\api_for_kursach\\ViewModels\\RegistrationRequest.cs",
               "RelativeToolTip": "api_for_kursach\\ViewModels\\RegistrationRequest.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAuwAYAAAAHAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -96,9 +96,9 @@
               "$type": "Document",
               "DocumentIndex": 4,
               "Title": "RegistrationResponse.cs",
-              "DocumentMoniker": "C:\\Users\\boris\\source\\repos\\api_for_kursach\\api_for_kursach\\ViewModels\\RegistrationResponse.cs",
+              "DocumentMoniker": "C:\\Users\\boris\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\git_test\\git_test\\api_for_kursach\\ViewModels\\RegistrationResponse.cs",
               "RelativeDocumentMoniker": "api_for_kursach\\ViewModels\\RegistrationResponse.cs",
-              "ToolTip": "C:\\Users\\boris\\source\\repos\\api_for_kursach\\api_for_kursach\\ViewModels\\RegistrationResponse.cs",
+              "ToolTip": "C:\\Users\\boris\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\git_test\\git_test\\api_for_kursach\\ViewModels\\RegistrationResponse.cs",
               "RelativeToolTip": "api_for_kursach\\ViewModels\\RegistrationResponse.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAuwAYAAAAsAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -108,9 +108,9 @@
               "$type": "Document",
               "DocumentIndex": 5,
               "Title": "Artist.cs",
-              "DocumentMoniker": "C:\\Users\\boris\\source\\repos\\api_for_kursach\\api_for_kursach\\Models\\Artist.cs",
+              "DocumentMoniker": "C:\\Users\\boris\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\git_test\\git_test\\api_for_kursach\\Models\\Artist.cs",
               "RelativeDocumentMoniker": "api_for_kursach\\Models\\Artist.cs",
-              "ToolTip": "C:\\Users\\boris\\source\\repos\\api_for_kursach\\api_for_kursach\\Models\\Artist.cs",
+              "ToolTip": "C:\\Users\\boris\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\git_test\\git_test\\api_for_kursach\\Models\\Artist.cs",
               "RelativeToolTip": "api_for_kursach\\Models\\Artist.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAuwAsAAAAqAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -120,9 +120,9 @@
               "$type": "Document",
               "DocumentIndex": 3,
               "Title": "appsettings.Development.json",
-              "DocumentMoniker": "C:\\Users\\boris\\source\\repos\\api_for_kursach\\api_for_kursach\\appsettings.Development.json",
+              "DocumentMoniker": "C:\\Users\\boris\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\git_test\\git_test\\api_for_kursach\\appsettings.Development.json",
               "RelativeDocumentMoniker": "api_for_kursach\\appsettings.Development.json",
-              "ToolTip": "C:\\Users\\boris\\source\\repos\\api_for_kursach\\api_for_kursach\\appsettings.Development.json",
+              "ToolTip": "C:\\Users\\boris\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\git_test\\git_test\\api_for_kursach\\appsettings.Development.json",
               "RelativeToolTip": "api_for_kursach\\appsettings.Development.json",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
@@ -132,9 +132,9 @@
               "$type": "Document",
               "DocumentIndex": 10,
               "Title": "launchSettings.json",
-              "DocumentMoniker": "C:\\Users\\boris\\source\\repos\\api_for_kursach\\api_for_kursach\\Properties\\launchSettings.json",
+              "DocumentMoniker": "C:\\Users\\boris\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\git_test\\git_test\\api_for_kursach\\Properties\\launchSettings.json",
               "RelativeDocumentMoniker": "api_for_kursach\\Properties\\launchSettings.json",
-              "ToolTip": "C:\\Users\\boris\\source\\repos\\api_for_kursach\\api_for_kursach\\Properties\\launchSettings.json",
+              "ToolTip": "C:\\Users\\boris\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\git_test\\git_test\\api_for_kursach\\Properties\\launchSettings.json",
               "RelativeToolTip": "api_for_kursach\\Properties\\launchSettings.json",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAZAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
@@ -144,9 +144,9 @@
               "$type": "Document",
               "DocumentIndex": 2,
               "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\boris\\source\\repos\\api_for_kursach\\api_for_kursach\\appsettings.json",
+              "DocumentMoniker": "C:\\Users\\boris\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\git_test\\git_test\\api_for_kursach\\appsettings.json",
               "RelativeDocumentMoniker": "api_for_kursach\\appsettings.json",
-              "ToolTip": "C:\\Users\\boris\\source\\repos\\api_for_kursach\\api_for_kursach\\appsettings.json",
+              "ToolTip": "C:\\Users\\boris\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\git_test\\git_test\\api_for_kursach\\appsettings.json",
               "RelativeToolTip": "api_for_kursach\\appsettings.json",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAABFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
@@ -154,13 +154,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "AccountController.cs",
-              "DocumentMoniker": "C:\\Users\\boris\\source\\repos\\api_for_kursach\\api_for_kursach\\Controllers\\AccountController.cs",
+              "DocumentMoniker": "C:\\Users\\boris\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\git_test\\git_test\\api_for_kursach\\Controllers\\AccountController.cs",
               "RelativeDocumentMoniker": "api_for_kursach\\Controllers\\AccountController.cs",
-              "ToolTip": "C:\\Users\\boris\\source\\repos\\api_for_kursach\\api_for_kursach\\Controllers\\AccountController.cs",
+              "ToolTip": "C:\\Users\\boris\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\git_test\\git_test\\api_for_kursach\\Controllers\\AccountController.cs",
               "RelativeToolTip": "api_for_kursach\\Controllers\\AccountController.cs",
-              "ViewState": "AQIAAA4AAAAAAAAAAAAcwFUAAAAMAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAFUAAAAMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-05T13:32:14.463Z",
               "EditorCaption": ""
@@ -169,9 +169,9 @@
               "$type": "Document",
               "DocumentIndex": 9,
               "Title": "HomeController.cs",
-              "DocumentMoniker": "C:\\Users\\boris\\source\\repos\\api_for_kursach\\api_for_kursach\\Controllers\\HomeController.cs",
+              "DocumentMoniker": "C:\\Users\\boris\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\git_test\\git_test\\api_for_kursach\\Controllers\\HomeController.cs",
               "RelativeDocumentMoniker": "api_for_kursach\\Controllers\\HomeController.cs",
-              "ToolTip": "C:\\Users\\boris\\source\\repos\\api_for_kursach\\api_for_kursach\\Controllers\\HomeController.cs",
+              "ToolTip": "C:\\Users\\boris\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\git_test\\git_test\\api_for_kursach\\Controllers\\HomeController.cs",
               "RelativeToolTip": "api_for_kursach\\Controllers\\HomeController.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAYAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -179,15 +179,16 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\boris\\source\\repos\\api_for_kursach\\api_for_kursach\\Program.cs",
+              "DocumentMoniker": "C:\\Users\\boris\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\git_test\\git_test\\api_for_kursach\\Program.cs",
               "RelativeDocumentMoniker": "api_for_kursach\\Program.cs",
-              "ToolTip": "C:\\Users\\boris\\source\\repos\\api_for_kursach\\api_for_kursach\\Program.cs",
+              "ToolTip": "C:\\Users\\boris\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\git_test\\git_test\\api_for_kursach\\Program.cs",
               "RelativeToolTip": "api_for_kursach\\Program.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAAA4AAAAIAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAATAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-05T13:24:18.467Z"
+              "WhenOpened": "2024-12-05T13:24:18.467Z",
+              "EditorCaption": ""
             }
           ]
         },
