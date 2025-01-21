@@ -2,7 +2,7 @@ using api_for_kursach.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 <<<<<<< HEAD
-//some differnts 14 36
+//some differnts 14 47
 =======
 
 >>>>>>> ad68ff72a590d773023af271ab2a3ab186896ac0
@@ -15,7 +15,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     options =>
     {
         options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
-        options.SlidingExpiration = true; // Обновление времени жизни при каждом запросе
+        options.SlidingExpiration = true; // ГЋГЎГ­Г®ГўГ«ГҐГ­ГЁГҐ ГўГ°ГҐГ¬ГҐГ­ГЁ Г¦ГЁГ§Г­ГЁ ГЇГ°ГЁ ГЄГ Г¦Г¤Г®Г¬ Г§Г ГЇГ°Г®Г±ГҐ
         
         options.Cookie.Name = "AuthCookie";
 
