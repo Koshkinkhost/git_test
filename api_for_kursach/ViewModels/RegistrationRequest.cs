@@ -11,5 +11,7 @@ namespace api_for_kursach.ViewModels
         public string Password { get; set; }
         [Compare(nameof(Password))]
         public string ConfirmPassword { get; set; }
+        [Required(ErrorMessage ="Role is required")]
+        public string Role { get; set;}
     }
 }

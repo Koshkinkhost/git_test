@@ -37,7 +37,7 @@ namespace api_for_kursach.Controllers
                     ToDictionary(kvp => kvp.Key, kvp => kvp.Value.Errors.Select(e => e.ErrorMessage).ToArray())
                 };
             }
-           Artist artist=new Artist() { Login = request.Login,Password=request.Password };
+           Artist artist=new Artist() { Login = request.Login,Password=request.Password,RoleId=context.Roles.FirstOrDefault(u=>u.name=="user").id };
             context.Artists.Add(artist);
             context.SaveChangesAsync();
             return new RegistrationResponse { 
@@ -49,7 +49,46 @@ namespace api_for_kursach.Controllers
         [HttpPost]
         public async Task< RegistrationResponse> Login([FromBody]LoginViewModel login)
         {
-            
+            var user=context.Artists.FirstOrDefault(u=>u.Login==login.Login );
+           
+            if (!ModelState.IsValid)
+            {
+                return new RegistrationResponse
+                {
+                    Success = false,
+                    messages = ModelState.Where(x => x.Value.Errors.Count > 0).
+                   ToDictionary(kvp => kvp.Key, kvp => kvp.Value.Errors.Select(e => e.ErrorMessage).ToArray())
+                };
+            }
+            if(user is null )
+            {
+                return new RegistrationResponse
+                {
+                    Success = false,
+                    messages = new Dictionary<string, string[]>
+                    {
+                            { "Errors", new string[] { "Login or password is incorrect or user is not exist" } }
+                    }
+                };
+
+            }
+            if (login.Role.ToLower()cd  == "admin")
+            {
+                var is_admin = context.Artists.FirstOrDefault(u => u.Login == user.Login && user.RoleId == 1);
+                if (is_admin is null)
+                {
+                    return new RegistrationResponse
+                    {
+                        Success = false,
+                        messages = new Dictionary<string, string[]>
+                    {
+                            { "Errors", new string[] { "You do not have an admin rights" } }
+                    }
+                    };
+                }
+            }
+
+
             var claims = new List<Claim>()
             {
                new Claim(ClaimTypes.Name,login.Login),

@@ -1,11 +1,7 @@
 using api_for_kursach.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
-<<<<<<< HEAD
-//some differnts 14 47
-=======
 
->>>>>>> ad68ff72a590d773023af271ab2a3ab186896ac0
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddMvc();

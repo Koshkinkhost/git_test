@@ -10,9 +10,11 @@ namespace api_for_kursach.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string Login {  get; set; }
+        public int RoleId {  get; set; }
       
         public string Password { get; set; }
-      
+        [ForeignKey("RoleId")]
+      public Roles Role { get; set; }
        
     }
 }
