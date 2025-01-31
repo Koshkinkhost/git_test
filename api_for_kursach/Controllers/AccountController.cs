@@ -2,6 +2,7 @@
 using api_for_kursach.ViewModels;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -49,18 +50,10 @@ namespace api_for_kursach.Controllers
         [HttpPost]
         public async Task< RegistrationResponse> Login([FromBody]LoginViewModel login)
         {
-            var user=context.Artists.FirstOrDefault(u=>u.Login==login.Login );
-           
-            if (!ModelState.IsValid)
-            {
-                return new RegistrationResponse
-                {
-                    Success = false,
-                    messages = ModelState.Where(x => x.Value.Errors.Count > 0).
-                   ToDictionary(kvp => kvp.Key, kvp => kvp.Value.Errors.Select(e => e.ErrorMessage).ToArray())
-                };
-            }
-            if(user is null )
+            Console.WriteLine($"Received Login: {login.Login}, Role: {login.Role}, Password: {login.Password}");
+
+            var user =context.Artists.FirstOrDefault(u=>u.Login==login.Login && u.Password==login.Password);
+            if (user is null)
             {
                 return new RegistrationResponse
                 {
@@ -72,7 +65,7 @@ namespace api_for_kursach.Controllers
                 };
 
             }
-            if (login.Role.ToLower()cd  == "admin")
+            if (login.Role.ToLower()=="admin")
             {
                 var is_admin = context.Artists.FirstOrDefault(u => u.Login == user.Login && user.RoleId == 1);
                 if (is_admin is null)
@@ -87,11 +80,23 @@ namespace api_for_kursach.Controllers
                     };
                 }
             }
+            if (!ModelState.IsValid)
+            {
+                return new RegistrationResponse
+                {
+                    Success = false,
+                    messages = ModelState.Where(x => x.Value.Errors.Count > 0).
+                   ToDictionary(kvp => kvp.Key, kvp => kvp.Value.Errors.Select(e => e.ErrorMessage).ToArray())
+                };
+            }
+           
+            
 
 
             var claims = new List<Claim>()
             {
                new Claim(ClaimTypes.Name,login.Login),
+               new Claim (ClaimTypes.Role,login.Role),
 
 
             };
@@ -107,6 +112,37 @@ namespace api_for_kursach.Controllers
 
 
 
+        }
+        [HttpPost]
+        public RegistrationResponse CheckRights([FromBody]LoginViewModel request)
+        {
+            var user = context.Artists.FirstOrDefault(u => u.Login == request.Login && u.RoleId == 1);
+            if(user is null)
+            {
+                return new RegistrationResponse
+                {
+                    Success = false,
+                    messages = new Dictionary<string, string[]>
+                    {
+                            { "Errors", new string[] { "You do not have an admin rights" } }
+                    }
+                };
+            }
+            return new RegistrationResponse
+            {
+                Success = true,
+                messages = new Dictionary<string, string[]>
+                    {
+                            { "Messages", new string[] { "You are admin" } }
+                    }
+            };
+        }
+        [Authorize]
+        [HttpGet]
+        public  IActionResult GetUserRole()
+        {
+            var user = HttpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role).Value;
+            return Ok(new { role = user });
         }
         [HttpPost]
         public ActionResult GetName([FromBody]string name)
