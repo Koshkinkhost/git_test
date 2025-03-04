@@ -9,9 +9,8 @@ namespace api_for_kursach.ViewModels
         [Required(ErrorMessage = "Password field is required")]
         [MinLength(5, ErrorMessage = "Password must be at least 5 symbols")]
         public string Password { get; set; }
-        [Compare(nameof(Password))]
+        [Compare(nameof(Password),ErrorMessage ="Passwords must be identical")]
         public string ConfirmPassword { get; set; }
-        [Required(ErrorMessage ="Role is required")]
-        public string Role { get; set;}
+       
     }
 }

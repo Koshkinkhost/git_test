@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using api_for_kursach.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace api_for_kursach.ViewModels
 {

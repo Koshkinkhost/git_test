@@ -6,5 +6,6 @@ namespace api_for_kursach.Models
         public DbSet<Artist> Artists { get; set; }
         public DbSet<Roles> Roles { get; set; }
         public DbSet<News> news { get; set; }
+        public DbSet<Studio> studios { get; set; }
     }
 }

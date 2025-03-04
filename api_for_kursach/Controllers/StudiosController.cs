@@ -1,44 +1,62 @@
-﻿using api_for_kursach.Models;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using api_for_kursach.ViewModels;
+using api_for_kursach.Models;
+using Microsoft.EntityFrameworkCore;
 namespace api_for_kursach.Controllers
 {
-    public class NewsController(AppliContext context) : Controller
+    public class StudiosController(AppliContext context) : Controller
     {
-        // GET: NewsController
+        [HttpPost]
+        public async Task<IActionResult> AddStudio([FromBody] StudioViewModel studio)
+        {
+            if (ModelState.IsValid)
+            {
+                Studio s = new Studio()
+                {
+                    latitude = studio.lat,
+                    longitude = studio.longt,
+                    name = studio.name,
+                    phone_num = studio.phone_num,
+                    email = studio.email,
+                    street = studio.street,
+                    city=studio.city,
+                    build = studio.build
+                };
+                context.Add(s);
+                await context.SaveChangesAsync();
+
+
+                return Ok(); 
+            }
+
+            return BadRequest("что то пошло не так"); 
+        }
+        public async  Task<IActionResult> Get_Studios()
+        {
+            var result= await context.studios.ToListAsync();
+            return Json(result);
+        }
+
+        // GET: StudiosController
         public ActionResult Index()
         {
             return View();
         }
 
-        // GET: NewsController/Details/5
+        // GET: StudiosController/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
-        [HttpGet]
-        public IActionResult GetNews()
-        {
-            var news = context.news;
-            return Json(news);
-        }
-        [HttpPost]
-        public void AddNews([FromBody]NewsViewModel model)
-        {
-            
-            var news = new News() { Title=model.Title,Description=model.Description,ImageUrl=model.ImageUrl,Link=model.Link, CreatedAt = model.Date};
-            context.news.Add(news);
-            context.SaveChanges();
-        }
 
-        // GET: NewsController/Create
+        // GET: StudiosController/Create
         public ActionResult Create()
         {
             return View();
         }
-       
-        // POST: NewsController/Create
+
+        // POST: StudiosController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
@@ -53,13 +71,13 @@ namespace api_for_kursach.Controllers
             }
         }
 
-        // GET: NewsController/Edit/5
+        // GET: StudiosController/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: NewsController/Edit/5
+        // POST: StudiosController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
@@ -74,13 +92,13 @@ namespace api_for_kursach.Controllers
             }
         }
 
-        // GET: NewsController/Delete/5
+        // GET: StudiosController/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: NewsController/Delete/5
+        // POST: StudiosController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)

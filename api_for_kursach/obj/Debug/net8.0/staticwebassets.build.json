@@ -1,11 +1,19 @@
 {
   "Version": 1,
-  "Hash": "IWLL3G1W2vtHtxb9qhB59XNQ2Q7CjJ1g7Mx6P0ZqmGk=",
+  "Hash": "Vuq+U6wDZ35iw5zk5GZbo9We3s+Sxxd212TmHV+8a3w=",
   "Source": "api_for_kursach",
   "BasePath": "_content/api_for_kursach",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "api_for_kursach\\wwwroot",
+      "Source": "api_for_kursach",
+      "ContentRoot": "C:\\Users\\boris\\OneDrive\\Рабочий стол\\git_test\\git_test\\api_for_kursach\\wwwroot\\",
+      "BasePath": "_content/api_for_kursach",
+      "Pattern": "**"
+    }
+  ],
   "Assets": []
 }

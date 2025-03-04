@@ -262,3 +262,4 @@ C:\Users\boris\OneDrive\Рабочий стол\git_test\git_test\api_for_kursac
 C:\Users\boris\OneDrive\Рабочий стол\git_test\git_test\api_for_kursach\obj\Debug\net8.0\api_for_.CC75E149.Up2Date
 C:\Users\boris\OneDrive\Рабочий стол\git_test\git_test\api_for_kursach\obj\Debug\net8.0\api_for_kursach.genruntimeconfig.cache
 C:\Users\boris\OneDrive\Рабочий стол\git_test\git_test\api_for_kursach\obj\Debug\net8.0\ref\api_for_kursach.dll
+C:\Users\boris\OneDrive\Рабочий стол\git_test\git_test\api_for_kursach\bin\Debug\net8.0\api_for_kursach.staticwebassets.runtime.json

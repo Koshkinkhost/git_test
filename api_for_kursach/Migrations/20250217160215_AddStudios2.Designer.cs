@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using api_for_kursach.Models;
 
@@ -11,9 +12,11 @@ using api_for_kursach.Models;
 namespace api_for_kursach.Migrations
 {
     [DbContext(typeof(AppliContext))]
-    partial class AppliContextModelSnapshot : ModelSnapshot
+    [Migration("20250217160215_AddStudios2")]
+    partial class AddStudios2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
