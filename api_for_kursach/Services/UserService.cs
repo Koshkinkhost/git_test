@@ -21,21 +21,21 @@ namespace api_for_kursach.Services
     public interface IUserService
     {
         Task<RegistrationResponse> Login(LoginViewModel login);
-        RegistrationResponse Registration(RegistrationRequest login);
+        Task<RegistrationResponse> Registration(RegistrationRequest login);
     }
 
-    public class UserService( AppliContext _context, IHttpContextAccessor httpCon) : IUserService
+    public class UserService(AppliContext _context, IHttpContextAccessor httpCon) : IUserService
     {
-       
+
 
         public async Task<RegistrationResponse> Login(LoginViewModel login)
         {
             Console.WriteLine($"Received Login: {login.Login}, Role: {login.Role}, Password: {login.Password}");
 
-            var user = await _context.Artists.FirstOrDefaultAsync(u => u.Login == login.Login && u.Password == login.Password && u.Role.name==login.Role);
+            var user = await _context.Artists.FirstOrDefaultAsync(u => u.Login == login.Login && u.Password == login.Password && u.Role.name == login.Role);
             if (user == null)
             {
-               
+
                 throw new UserNotExistException("Login or password is incorrect or user does not exist");
                 //return new RegistrationResponse
                 //{
@@ -46,7 +46,7 @@ namespace api_for_kursach.Services
                 //    }
                 //};
             }
-           
+
 
 
 
@@ -61,7 +61,7 @@ namespace api_for_kursach.Services
             var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
             var principal = new ClaimsPrincipal(claimsIdentity);
 
-            httpCon.HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,principal);
+            httpCon.HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
             return new RegistrationResponse
             {
                 Success = true,
@@ -72,18 +72,18 @@ namespace api_for_kursach.Services
             };
         }
 
-        public RegistrationResponse Registration(RegistrationRequest login)
+        public async Task<RegistrationResponse> Registration(RegistrationRequest login)
         {
-            var user = _context.Artists.FirstOrDefault(u => u.Login == login.Login);
+            var user =  _context.Artists.FirstOrDefault(u => u.Login == login.Login);
             if (user is not null)
             {
                 throw new LoginIsBusyException("Login is already taken");
-                
+
             }
             PasswordHasher<Artist> hasher = new PasswordHasher<Artist>();
             Artist artist = new Artist() { Login = login.Login, Password = login.Password, RoleId = _context.Roles.FirstOrDefault(u => u.name == "user").id };
             _context.Artists.Add(artist);
-            _context.SaveChangesAsync();
+           await  _context.SaveChangesAsync();
 
             return new RegistrationResponse
             {
@@ -94,6 +94,7 @@ namespace api_for_kursach.Services
                 }
             };
         }
+    
 
        
     }

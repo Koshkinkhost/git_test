@@ -38,7 +38,7 @@ namespace api_for_kursach.Controllers
             }
             try
             {
-                var result = user.Registration(request);
+                var result = await user.Registration(request);
 
                 return result;
             }
