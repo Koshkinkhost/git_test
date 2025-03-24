@@ -10,22 +10,36 @@
         }
         public async Task InvokeAsync(HttpContext context)
         {
+            // Включаем буферизацию запроса, чтобы можно было несколько раз читать тело
             context.Request.EnableBuffering();
+
+            // Копируем оригинальный поток тела запроса
             var originalStream = context.Request.Body;
-            
-            var reader= new StreamReader(context.Request.Body);
+            var memoryStream = new MemoryStream();
+
+            // Копируем данные из оригинального потока в новый memoryStream
+            await context.Request.Body.CopyToAsync(memoryStream);
+
+            memoryStream.Seek(0, SeekOrigin.Begin);
+
+            // Читаем тело запроса для логирования
+            var reader = new StreamReader(memoryStream);
             string body = await reader.ReadToEndAsync();
+
+            // Логируем запрос
             await Console.Out.WriteLineAsync($"Запрос  " +
                 $"Method: {context.Request.Method}" +
                 $"| URL: {context.Request.Path}" +
                 $"| Status Code: {context.Response.StatusCode}" +
                 $"| Body {body}");
 
-           
-            context.Request.Body.Position = 0;
-            
-            context.Request.Body = originalStream;
+            // Возвращаем позицию в начало в originalStream, чтобы последующие компоненты могли его использовать
+            memoryStream.Seek(0, SeekOrigin.Begin);
+            context.Request.Body = memoryStream;
+
+            // Передаем запрос дальше по конвейеру
             await next(context);
         }
+
     }
 }
