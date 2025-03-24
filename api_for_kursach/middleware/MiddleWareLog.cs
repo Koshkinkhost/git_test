@@ -2,12 +2,15 @@
 {
     public class MiddleWareLog
     {
-        private readonly   RequestDelegate next;
-        private readonly ILogger<MiddleWareLog> _logger;
+        private readonly RequestDelegate next;
+        private readonly ILogger<MiddleWareLog> _logger; // Логгер для записи логов
+
         public MiddleWareLog(RequestDelegate next, ILogger<MiddleWareLog> logger)
         {
             this.next = next;
+            _logger = logger; // Инициализация логгера
         }
+
         public async Task InvokeAsync(HttpContext context)
         {
             // Включаем буферизацию запроса, чтобы можно было несколько раз читать тело
@@ -26,8 +29,8 @@
             var reader = new StreamReader(memoryStream);
             string body = await reader.ReadToEndAsync();
 
-            // Логируем запрос
-            await Console.Out.WriteLineAsync($"Запрос  " +
+            // Логируем запрос с использованием ILogger
+            _logger.LogInformation($"Запрос  " +
                 $"Method: {context.Request.Method}" +
                 $"| URL: {context.Request.Path}" +
                 $"| Status Code: {context.Response.StatusCode}" +
@@ -40,6 +43,5 @@
             // Передаем запрос дальше по конвейеру
             await next(context);
         }
-
     }
 }
