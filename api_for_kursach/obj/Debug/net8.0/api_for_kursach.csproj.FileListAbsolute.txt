@@ -265,7 +265,6 @@ C:\Users\boris\OneDrive\Рабочий стол\git_test\git_test\api_for_kursac
 C:\Users\boris\OneDrive\Рабочий стол\git_test\git_test\api_for_kursach\bin\Debug\net8.0\api_for_kursach.staticwebassets.runtime.json
 C:\Users\boris\OneDrive\Рабочий стол\api_for_angular_cookies\git_test\api_for_kursach\bin\Debug\net8.0\appsettings.Development.json
 C:\Users\boris\OneDrive\Рабочий стол\api_for_angular_cookies\git_test\api_for_kursach\bin\Debug\net8.0\appsettings.json
-C:\Users\boris\OneDrive\Рабочий стол\api_for_angular_cookies\git_test\api_for_kursach\bin\Debug\net8.0\api_for_kursach.staticwebassets.runtime.json
 C:\Users\boris\OneDrive\Рабочий стол\api_for_angular_cookies\git_test\api_for_kursach\bin\Debug\net8.0\api_for_kursach.exe
 C:\Users\boris\OneDrive\Рабочий стол\api_for_angular_cookies\git_test\api_for_kursach\bin\Debug\net8.0\api_for_kursach.deps.json
 C:\Users\boris\OneDrive\Рабочий стол\api_for_angular_cookies\git_test\api_for_kursach\bin\Debug\net8.0\api_for_kursach.runtimeconfig.json
