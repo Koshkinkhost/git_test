@@ -13,35 +13,32 @@
 
         public async Task InvokeAsync(HttpContext context)
         {
-            // Включаем буферизацию запроса, чтобы можно было несколько раз читать тело
-            context.Request.EnableBuffering();
+            try
+            {
+                context.Request.EnableBuffering();
+                var originalStream = context.Request.Body;
+                var memoryStream = new MemoryStream();
+                await context.Request.Body.CopyToAsync(memoryStream);
 
-            // Копируем оригинальный поток тела запроса
-            var originalStream = context.Request.Body;
-            var memoryStream = new MemoryStream();
+                memoryStream.Seek(0, SeekOrigin.Begin);
 
-            // Копируем данные из оригинального потока в новый memoryStream
-            await context.Request.Body.CopyToAsync(memoryStream);
+                var reader = new StreamReader(memoryStream);
+                string body = await reader.ReadToEndAsync();
 
-            memoryStream.Seek(0, SeekOrigin.Begin);
+                _logger.LogInformation($"Request Method: {context.Request.Method}, Body: {body}");
 
-            // Читаем тело запроса для логирования
-            var reader = new StreamReader(memoryStream);
-            string body = await reader.ReadToEndAsync();
+                memoryStream.Seek(0, SeekOrigin.Begin);
+                context.Request.Body = memoryStream;
 
-            // Логируем запрос с использованием ILogger
-            _logger.LogInformation($"Запрос  " +
-                $"Method: {context.Request.Method}" +
-                $"| URL: {context.Request.Path}" +
-                $"| Status Code: {context.Response.StatusCode}" +
-                $"| Body {body}");
-
-            // Возвращаем позицию в начало в originalStream, чтобы последующие компоненты могли его использовать
-            memoryStream.Seek(0, SeekOrigin.Begin);
-            context.Request.Body = memoryStream;
-
-            // Передаем запрос дальше по конвейеру
-            await next(context);
+                await next(context);  // Передаем запрос дальше по конвейеру
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error processing request: {ex.Message}");
+                context.Response.StatusCode = 500;  // Внутренняя ошибка сервера
+                await context.Response.WriteAsync("Internal Server Error");
+            }
         }
+
     }
 }
