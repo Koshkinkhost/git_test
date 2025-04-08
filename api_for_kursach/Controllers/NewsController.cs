@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using api_for_kursach.ViewModels;
 namespace api_for_kursach.Controllers
 {
-    public class NewsController(AppliContext context) : Controller
+    public class NewsController() : Controller
     {
         // GET: NewsController
         public ActionResult Index()
@@ -18,19 +18,9 @@ namespace api_for_kursach.Controllers
             return View();
         }
         [HttpGet]
-        public IActionResult GetNews()
-        {
-            var news = context.news;
-            return Json(news);
-        }
-        [HttpPost]
-        public void AddNews([FromBody]NewsViewModel model)
-        {
-            
-            var news = new News() { Title=model.Title,Description=model.Description,ImageUrl=model.ImageUrl,Link=model.Link, CreatedAt = model.Date};
-            context.news.Add(news);
-            context.SaveChanges();
-        }
+       
+       
+     
 
         // GET: NewsController/Create
         public ActionResult Create()

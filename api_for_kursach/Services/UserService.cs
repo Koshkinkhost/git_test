@@ -1,57 +1,49 @@
-﻿using api_for_kursach.Models;
+﻿using api_for_kursach.Exceptions;
+using api_for_kursach.Models;
+using api_for_kursach.Repositories;
 using api_for_kursach.ViewModels;
 using Microsoft.AspNetCore.Authentication.Cookies;
-
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Cors;
-
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
 using System.Security.Claims;
-using api_for_kursach.Exceptions;
-using Microsoft.Identity.Client;
-using Azure.Core;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
+
 namespace api_for_kursach.Services
 {
     public interface IUserService
     {
         Task<RegistrationResponse> Login(LoginViewModel login);
-        Task<RegistrationResponse> Registration(RegistrationRequest login);
+        Task<RegistrationResponse> Registration(RegistrationRequest registrationRequest);
+        Task<CheckAuthResponse> CheckAuth();
     }
 
-    public class UserService(AppliContext _context, IHttpContextAccessor httpCon) : IUserService
+    public class UserService : IUserService
     {
+        private readonly IUserRepository _userRepository;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
+        public UserService(IUserRepository userRepository, IHttpContextAccessor httpContextAccessor)
+        {
+            _userRepository = userRepository;
+            _httpContextAccessor = httpContextAccessor;
+        }
 
         public async Task<RegistrationResponse> Login(LoginViewModel login)
         {
             Console.WriteLine($"Received Login: {login.Login}, Role: {login.Role}, Password: {login.Password}");
 
-            var user = await _context.Artists.FirstOrDefaultAsync(u => u.Login == login.Login && u.Password == login.Password && u.Role.name == login.Role);
-            if (user == null)
+            // Получаем пользователя по логину
+            var user = await _userRepository.GetUserByLoginAsync(login.Login);
+            PasswordHasher<User> hasher = new PasswordHasher<User>();
+            var result = hasher.VerifyHashedPassword(user, user.PasswordHash, login.Password);
+            if (result != PasswordVerificationResult.Success || user.Role != login.Role)
             {
-
                 throw new UserNotExistException("Login or password is incorrect or user does not exist");
-                //return new RegistrationResponse
-                //{
-                //    Success = false,
-                //    messages = new Dictionary<string, string[]>
-                //    {
-                //        { "Errors", new string[] { "Login or password is incorrect or user does not exist" } }
-                //    }
-                //};
             }
 
-
-
-
-
-
+            // Если пользователь найден, создаем claims и авторизуем
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name, login.Login),
@@ -61,7 +53,8 @@ namespace api_for_kursach.Services
             var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
             var principal = new ClaimsPrincipal(claimsIdentity);
 
-            httpCon.HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
+            await _httpContextAccessor.HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
+
             return new RegistrationResponse
             {
                 Success = true,
@@ -72,32 +65,87 @@ namespace api_for_kursach.Services
             };
         }
 
-        public async Task<RegistrationResponse> Registration(RegistrationRequest login)
+        public async Task<RegistrationResponse> Registration(RegistrationRequest registrationRequest)
         {
-            var user =  _context.Artists.FirstOrDefault(u => u.Login == login.Login);
-            if (user is not null)
+            // Проверяем, существует ли уже пользователь с таким логином
+            var existingUser = await _userRepository.GetUserByLoginAsync(registrationRequest.Login);
+            if (existingUser != null)
             {
                 throw new LoginIsBusyException("Login is already taken");
-
             }
-            PasswordHasher<Artist> hasher = new PasswordHasher<Artist>();
-            Artist artist = new Artist() { Login = login.Login, Password = login.Password, RoleId = _context.Roles.FirstOrDefault(u => u.name == "user").id };
-            _context.Artists.Add(artist);
-           await  _context.SaveChangesAsync();
+
+            // Создаем новый объект пользователя
+            PasswordHasher<User> hasher = new PasswordHasher<User>();
+            var user = new User
+            {
+                Username = registrationRequest.Login,
+            };
+            user.PasswordHash = hasher.HashPassword(user, registrationRequest.Password);
+
+            // Получаем роль по имени (например, "user")
+            var role = await _userRepository.GetRoleByNameAsync("user");
+            if (role == null)
+            {
+                throw new Exception("Role not found");
+            }
+            user.RoleId = role.RoleId;
+             
+            // Создаем нового артиста
+            var artist = new Artist
+            {
+                Name = registrationRequest.Login,
+            };
+
+            // Добавляем пользователя и артиста
+            await _userRepository.AddUserAsync(user, artist);
 
             return new RegistrationResponse
             {
                 Success = true,
                 messages = new Dictionary<string, string[]>
                 {
-                    { "Messages", new string[] { "Login successful" } }
+                    { "Messages", new string[] { "Registration successful" } }
                 }
             };
         }
-    
 
-       
+        public async Task<CheckAuthResponse> CheckAuth()
+        {
+            var user = _httpContextAccessor.HttpContext.User;
+
+            // Проверка, авторизован ли пользователь
+            if (user.Identity.IsAuthenticated)
+            {
+                // Возвращаем информацию о пользователе (например, логин и роль)
+                var username = user.Identity.Name;
+                var role = user.FindFirst(ClaimTypes.Role)?.Value;
+
+                return new CheckAuthResponse
+                {
+                    IsAuthenticated = true,
+                    Username = username,
+                    Role = role
+                };
+            }
+            else
+            {
+                return new CheckAuthResponse
+                {
+                    IsAuthenticated = false,
+                    Username = null,
+                    Role = null
+                };
+            }
+        }
     }
+
+    public class CheckAuthResponse
+    {
+        public bool IsAuthenticated { get; set; }
+        public string Username { get; set; }
+        public string Role { get; set; }
+    }
+
     public static class ServiceProviderUserExtensions
     {
         public static void AddUserService(this IServiceCollection services)

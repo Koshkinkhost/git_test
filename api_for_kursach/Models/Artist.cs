@@ -1,20 +1,23 @@
-﻿
-using Microsoft.AspNetCore.Identity;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-namespace api_for_kursach.Models
+﻿using System;
+using System.Collections.Generic;
+
+namespace api_for_kursach.Models;
+
+public partial class Artist
 {
-    public class Artist
-    {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
-        public string Login {  get; set; }
-        public int RoleId {  get; set; }
-      
-        public string Password { get; set; }
-        [ForeignKey("RoleId")]
-      public Roles Role { get; set; }
-       
-    }
+    public int ArtistId { get; set; }
+
+    public string Name { get; set; } = null!;
+
+    public DateTime? BirthDate { get; set; }
+
+    public string? Country { get; set; }
+
+    public string? ContactInfo { get; set; }
+
+    public bool IsActive { get; set; }
+
+    public int? RoleId { get; set; }
+
+    public virtual ICollection<User> Users { get; set; } = new List<User>();
 }
