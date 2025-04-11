@@ -7,17 +7,17 @@ public partial class License
 {
     public int LicenseId { get; set; }
 
-    public int? CompositionId { get; set; }
+    public int TrackId { get; set; }
 
-    public int? PublisherId { get; set; }
+    public int PublisherId { get; set; }
 
-    public DateTime? StartDate { get; set; }
+    public DateOnly StartDate { get; set; }
 
-    public DateTime? EndDate { get; set; }
+    public DateOnly EndDate { get; set; }
 
     public string? Territory { get; set; }
 
-    public virtual Composition? Composition { get; set; }
+    public virtual Publisher Publisher { get; set; } = null!;
 
-    public virtual Publisher? Publisher { get; set; }
+    public virtual Track Track { get; set; } = null!;
 }

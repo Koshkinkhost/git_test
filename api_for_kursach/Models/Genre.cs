@@ -9,5 +9,5 @@ public partial class Genre
 
     public string GenreName { get; set; } = null!;
 
-    public virtual ICollection<Composition> Compositions { get; set; } = new List<Composition>();
+    public virtual ICollection<Track> Tracks { get; set; } = new List<Track>();
 }

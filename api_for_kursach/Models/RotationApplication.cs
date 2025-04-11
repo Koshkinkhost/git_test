@@ -7,19 +7,19 @@ public partial class RotationApplication
 {
     public int ApplicationId { get; set; }
 
-    public int? CompositionId { get; set; }
+    public int TrackId { get; set; }
 
-    public int? AuthorId { get; set; }
+    public int RadioStationId { get; set; }
 
     public string Status { get; set; } = null!;
 
-    public DateTime? SubmissionDate { get; set; }
+    public DateTime ApplicationDate { get; set; }
 
     public DateTime? ReviewDate { get; set; }
 
     public string? Notes { get; set; }
 
-    public virtual Author? Author { get; set; }
+    public virtual RadioStation RadioStation { get; set; } = null!;
 
-    public virtual Composition? Composition { get; set; }
+    public virtual Track Track { get; set; } = null!;
 }

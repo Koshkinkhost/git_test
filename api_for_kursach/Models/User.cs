@@ -7,21 +7,15 @@ public partial class User
 {
     public int UserId { get; set; }
 
-    public int? ArtistId { get; set; }
-
     public string Username { get; set; } = null!;
 
     public string PasswordHash { get; set; } = null!;
 
     public string Role { get; set; } = null!;
 
-    public bool IsActive { get; set; }
+    public virtual ICollection<Artist> Artists { get; set; } = new List<Artist>();
 
-    public DateTime? LastLogin { get; set; }
+    public virtual ICollection<ListeningHistory> ListeningHistories { get; set; } = new List<ListeningHistory>();
 
-    public int? RoleId { get; set; }
-
-    public virtual Artist? Artist { get; set; }
-
-    public virtual Role? RoleNavigation { get; set; }
+    public virtual ICollection<News> News { get; set; } = new List<News>();
 }

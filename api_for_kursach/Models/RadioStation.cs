@@ -9,11 +9,11 @@ public partial class RadioStation
 
     public string Name { get; set; } = null!;
 
-    public string? Frequency { get; set; }
+    public string Frequency { get; set; } = null!;
 
     public string? Country { get; set; }
 
     public string? ContactInfo { get; set; }
 
-    public virtual ICollection<Rotation> Rotations { get; set; } = new List<Rotation>();
+    public virtual ICollection<RotationApplication> RotationApplications { get; set; } = new List<RotationApplication>();
 }

@@ -7,17 +7,23 @@ public partial class Artist
 {
     public int ArtistId { get; set; }
 
+    public int? UserId { get; set; }
+
     public string Name { get; set; } = null!;
 
-    public DateTime? BirthDate { get; set; }
+    public string? Bio { get; set; }
 
-    public string? Country { get; set; }
+    public int? StudioId { get; set; }
 
-    public string? ContactInfo { get; set; }
+    public virtual ICollection<Album> Albums { get; set; } = new List<Album>();
 
-    public bool IsActive { get; set; }
+    public virtual ICollection<News> News { get; set; } = new List<News>();
 
-    public int? RoleId { get; set; }
+    public virtual ICollection<Royalty> Royalties { get; set; } = new List<Royalty>();
 
-    public virtual ICollection<User> Users { get; set; } = new List<User>();
+    public virtual Studio? Studio { get; set; }
+
+    public virtual ICollection<Track> Tracks { get; set; } = new List<Track>();
+
+    public virtual User? User { get; set; }
 }

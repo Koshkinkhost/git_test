@@ -13,7 +13,5 @@ public partial class Publisher
 
     public string? ContractTerms { get; set; }
 
-    public virtual ICollection<Album> Albums { get; set; } = new List<Album>();
-
     public virtual ICollection<License> Licenses { get; set; } = new List<License>();
 }

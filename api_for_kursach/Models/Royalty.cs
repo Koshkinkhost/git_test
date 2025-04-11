@@ -7,19 +7,15 @@ public partial class Royalty
 {
     public int RoyaltyId { get; set; }
 
-    public int? CompositionId { get; set; }
+    public int TrackId { get; set; }
 
-    public int? AuthorId { get; set; }
+    public int AuthorId { get; set; }
 
     public decimal Amount { get; set; }
 
-    public DateTime? PaymentDate { get; set; }
+    public DateOnly PaymentDate { get; set; }
 
-    public int? RotationId { get; set; }
+    public virtual Artist Author { get; set; } = null!;
 
-    public virtual Author? Author { get; set; }
-
-    public virtual Composition? Composition { get; set; }
-
-    public virtual Rotation? Rotation { get; set; }
+    public virtual Track Track { get; set; } = null!;
 }

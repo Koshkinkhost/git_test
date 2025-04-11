@@ -1,34 +1,60 @@
-﻿
+﻿using api_for_kursach.DTO;
+using api_for_kursach.Services;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
-using api_for_kursach.ViewModels;
+
 namespace api_for_kursach.Controllers
 {
-    public class NewsController() : Controller
+    
+    public class ArtistController : Controller
     {
-        // GET: NewsController
+        private readonly IArtistService artistService;
+        public ArtistController(IArtistService service)
+        {
+            artistService = service;
+        }
+        [HttpPost]
+        public async  Task< IActionResult> GetTracks([FromBody] ArtistDTO art)
+        {
+            await Console.Out.WriteLineAsync(art.name);
+            try
+            {
+                return Ok(await artistService.GetArtistTracksAsync(art));
+
+            }
+            catch (Exception ex)
+            {
+                return Ok(ex.Message+ex.InnerException);
+            }
+            //   return Ok( await artistService.GetArtistTracksAsync(name));
+        
+        }
+        [HttpPost]
+        public async Task<IActionResult> GetAlbums([FromBody] ArtistDTO art)
+        {
+            await Console.Out.WriteLineAsync("name равно "+art.name);
+            return Ok(await artistService.GetArtistAlbumsAsync(art));
+        }
+        // GET: ArtistController
         public ActionResult Index()
         {
             return View();
         }
 
-        // GET: NewsController/Details/5
+        // GET: ArtistController/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
-        [HttpGet]
-       
-       
-     
 
-        // GET: NewsController/Create
+        // GET: ArtistController/Create
         public ActionResult Create()
         {
             return View();
         }
-       
-        // POST: NewsController/Create
+
+        // POST: ArtistController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
@@ -43,13 +69,13 @@ namespace api_for_kursach.Controllers
             }
         }
 
-        // GET: NewsController/Edit/5
+        // GET: ArtistController/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: NewsController/Edit/5
+        // POST: ArtistController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
@@ -64,13 +90,13 @@ namespace api_for_kursach.Controllers
             }
         }
 
-        // GET: NewsController/Delete/5
+        // GET: ArtistController/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: NewsController/Delete/5
+        // POST: ArtistController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)

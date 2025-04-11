@@ -25,7 +25,7 @@
                 var reader = new StreamReader(memoryStream);
                 string body = await reader.ReadToEndAsync();
 
-                _logger.LogInformation($"Request Method: {context.Request.Method}, Body: {body}");
+                _logger.LogInformation($"Request Method: {context.Request.Method}, Body: {body} ");
 
                 memoryStream.Seek(0, SeekOrigin.Begin);
                 context.Request.Body = memoryStream;

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using api_for_kursach.ViewModels;
-using api_for_kursach.Models;
+
 using Microsoft.EntityFrameworkCore;
 namespace api_for_kursach.Controllers
 {

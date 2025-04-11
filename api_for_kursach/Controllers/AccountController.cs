@@ -1,4 +1,4 @@
-﻿using api_for_kursach.Models;
+﻿
 using api_for_kursach.ViewModels;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -43,8 +43,9 @@ namespace api_for_kursach.Controllers
 
             try
             {
-                var result = await _userService.Registration(request);
-                return result;
+                //var result = await _userService.Registration(request);
+                //return result;
+                return null;
             }
             catch (Exception ex)
             {
@@ -73,8 +74,9 @@ namespace api_for_kursach.Controllers
             {
                 try
                 {
-                    var response = await _userService.Login(login);
-                    return response;
+                    //var response = await _userService.Login(login);
+                    //return response;
+                    return null;
                 }
                 catch (Exception ex)
                 {

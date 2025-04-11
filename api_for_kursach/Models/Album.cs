@@ -7,13 +7,13 @@ public partial class Album
 {
     public int AlbumId { get; set; }
 
+    public int ArtistId { get; set; }
+
     public string Title { get; set; } = null!;
 
-    public int? ReleaseYear { get; set; }
+    public DateOnly ReleaseDate { get; set; }
 
-    public int? PublisherId { get; set; }
+    public virtual Artist Artist { get; set; } = null!;
 
-    public virtual ICollection<AlbumComposition> AlbumCompositions { get; set; } = new List<AlbumComposition>();
-
-    public virtual Publisher? Publisher { get; set; }
+    public virtual ICollection<Track> Tracks { get; set; } = new List<Track>();
 }
