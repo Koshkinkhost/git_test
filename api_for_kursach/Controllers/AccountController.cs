@@ -67,49 +67,49 @@ namespace api_for_kursach.Controllers
         }
 
         // POST: Login
-        [HttpPost]
-        public async Task<RegistrationResponse> Login([FromBody] LoginViewModel login)
-        {
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    //var response = await _userService.Login(login);
-                    //return response;
-                    return null;
-                }
-                catch (Exception ex)
-                {
-                    switch (ex)
-                    {
-                        case UserNotExistException:
-                            return _factory.CreateFailureResponse(new Dictionary<string, string[]>
-                            {
-                                { "Errors", new[] { "Login or password is incorrect or user does not exist" } }
-                            });
+        //[HttpPost]
+        //public async Task<RegistrationResponse> Login([FromBody] LoginViewModel login)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        try
+        //        {
+        //            var response = await _userService.Login(login);
+        //            return response;
+        //            return null;
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            switch (ex)
+        //            {
+        //                case UserNotExistException:
+        //                    return _factory.CreateFailureResponse(new Dictionary<string, string[]>
+        //                    {
+        //                        { "Errors", new[] { "Login or password is incorrect or user does not exist" } }
+        //                    });
 
-                        case NoAdminRights:
-                            return _factory.CreateFailureResponse(new Dictionary<string, string[]>
-                            {
-                                { "Errors", new[] { "You do not have admin rights" } }
-                            });
+        //                case NoAdminRights:
+        //                    return _factory.CreateFailureResponse(new Dictionary<string, string[]>
+        //                    {
+        //                        { "Errors", new[] { "You do not have admin rights" } }
+        //                    });
 
-                        default:
-                            return _factory.CreateFailureResponse(new Dictionary<string, string[]>
-                            {
-                                { "Errors", new[] { "An unexpected error occurred. Please try again later." } }
-                            });
-                    }
-                }
-            }
-            else
-            {
-                return _factory.CreateFailureResponse(new Dictionary<string, string[]>
-                {
-                    { "Errors", new[] { "Data is incorrect" } }
-                });
-            }
-        }
+        //                default:
+        //                    return _factory.CreateFailureResponse(new Dictionary<string, string[]>
+        //                    {
+        //                        { "Errors", new[] { "An unexpected error occurred. Please try again later." } }
+        //                    });
+        //            }
+        //        }
+        //    }
+        //    else
+        //    {
+        //        return _factory.CreateFailureResponse(new Dictionary<string, string[]>
+        //        {
+        //            { "Errors", new[] { "Data is incorrect" } }
+        //        });
+        //    }
+        //}
 
         // POST: Check Rights
         [HttpPost]

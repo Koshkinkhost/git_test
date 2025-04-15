@@ -2,7 +2,7 @@
 
 namespace api_for_kursach.DTO
 {
-    public class TrackDTO
+    public class TracksDTO
     {
         public List<TrackSimpleDTO> Tracks { get; set; }
     }

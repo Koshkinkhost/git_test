@@ -14,9 +14,9 @@ namespace api_for_kursach.Services
 {
     public interface IUserService
     {
-        //Task<RegistrationResponse> Login(LoginViewModel login);
-        //Task<RegistrationResponse> Registration(RegistrationRequest registrationRequest);
-        //Task<CheckAuthResponse> CheckAuth();
+    //    Task<RegistrationResponse> Login(LoginViewModel login);
+    //    Task<RegistrationResponse> Registration(RegistrationRequest registrationRequest);
+    //    Task<CheckAuthResponse> CheckAuth();
     }
 
     public class UserService : IUserService

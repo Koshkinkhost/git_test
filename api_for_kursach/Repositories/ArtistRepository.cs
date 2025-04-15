@@ -11,7 +11,7 @@ namespace api_for_kursach.Repositories
 
 
         Task<IEnumerable<ArtistAlbumDTO>> GetArtistAlbumsAsync(ArtistDTO id); // Получить альбомы артиста
-        Task<TrackDTO> GetArtistTracksByUserNameAsync(ArtistDTO username); // Получить треки артиста
+        Task<TracksDTO> GetArtistTracksByUserNameAsync(ArtistDTO username); // Получить треки артиста
         Task<IEnumerable<Artist>> GetSimilarArtistsAsync(int id); // Получить похожих артистов
 
     }
@@ -56,7 +56,7 @@ namespace api_for_kursach.Repositories
 
        
 
-        public async Task<TrackDTO> GetArtistTracksByUserNameAsync(ArtistDTO userName)
+        public async Task<TracksDTO> GetArtistTracksByUserNameAsync(ArtistDTO userName)
         {
             // Находим пользователя по имени
             var user = await _context.Users
@@ -82,13 +82,15 @@ namespace api_for_kursach.Repositories
                            TrackId = t.TrackId,
                            Title = t.Title,
                            Track_Artist=t.Artist.Name,
+                           Genre_track=t.Genre.GenreName
+                           
                        }).ToListAsync();
-                    return  new TrackDTO { Tracks =result};
+                    return  new TracksDTO { Tracks =result};
                     // ; // Возвращаем список треков артиста
                 }
                
             }
-            return new TrackDTO { };
+            return new TracksDTO { };
 
         }
 

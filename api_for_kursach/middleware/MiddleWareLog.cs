@@ -13,8 +13,7 @@
 
         public async Task InvokeAsync(HttpContext context)
         {
-            try
-            {
+            
                 context.Request.EnableBuffering();
                 var originalStream = context.Request.Body;
                 var memoryStream = new MemoryStream();
@@ -31,13 +30,7 @@
                 context.Request.Body = memoryStream;
 
                 await next(context);  // Передаем запрос дальше по конвейеру
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError($"Error processing request: {ex.Message}");
-                context.Response.StatusCode = 500;  // Внутренняя ошибка сервера
-                await context.Response.WriteAsync("Internal Server Error");
-            }
+           
         }
 
     }

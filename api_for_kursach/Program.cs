@@ -23,9 +23,13 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 
     });
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IArtistService, ArtistService>();
 builder.Services.AddScoped<IAristRepository, ArtistRepository>();
-builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<ITrackService, TrackService>();
+builder.Services.AddScoped<ITrackRepository, TrackRepository>();
+builder.Services.AddScoped<IAlbumRepository, AlbumRepository>();
+builder.Services.AddScoped<IAlbumService, AlbumService>();
 var app = builder.Build();
 app.UseAuthentication();
 app.UseAuthorization();

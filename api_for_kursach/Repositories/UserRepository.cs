@@ -8,6 +8,7 @@ namespace api_for_kursach.Repositories
 
     public interface IUserRepository
     {
+        Task GetRoleByNameAsync(string v);
         Task<User> GetUserByLoginAsync(string login);
         //Task<Role> GetRoleByNameAsync(string roleName);
         
@@ -20,6 +21,11 @@ namespace api_for_kursach.Repositories
         public UserRepository(MusicLabelContext context)
         {
             _context = context;
+        }
+
+        public Task GetRoleByNameAsync(string v)
+        {
+            throw new NotImplementedException();
         }
 
         // Получить пользователя по логину, включая роль

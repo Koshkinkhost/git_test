@@ -4,6 +4,8 @@
     {
         public int TrackId { get; set; }
         public string Title { get; set; }
+        public int AlbumId {  get; set; }
         public string Track_Artist {  get; set; }
+        public string Genre_track {  get; set; }
     }
 }
