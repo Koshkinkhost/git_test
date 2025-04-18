@@ -9,7 +9,9 @@ namespace api_for_kursach.Repositories
     public interface IUserRepository
     {
         Task GetRoleByNameAsync(string v);
+        Task<User> GetUserByLoginAsync(string login, string role);
         Task<User> GetUserByLoginAsync(string login);
+
         //Task<Role> GetRoleByNameAsync(string roleName);
         
     }
@@ -29,13 +31,18 @@ namespace api_for_kursach.Repositories
         }
 
         // Получить пользователя по логину, включая роль
+        public async Task<User> GetUserByLoginAsync(string login,string role)
+        {
+            return await _context.Users.FirstOrDefaultAsync(u => u.Username == login&&u.Role==role);
+        }
         public async Task<User> GetUserByLoginAsync(string login)
         {
             return await _context.Users.FirstOrDefaultAsync(u => u.Username == login);
         }
 
+
         // Получить роль по имени
-      
+
 
         // Добавить нового пользователя
         //public async Task AddUserAsync(User user, Artist artist, Author author)

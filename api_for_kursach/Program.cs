@@ -17,9 +17,11 @@ builder.Services.AddDbContext<MusicLabelContext>(options => options.UseSqlServer
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(
     options =>
     {
+        options.Cookie.HttpOnly = true;
         options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
         options.SlidingExpiration = true;
         options.Cookie.Name = "AuthCookie";
+        options.Cookie.IsEssential = true;
 
     });
 builder.Services.AddScoped<IUserService, UserService>();
@@ -30,6 +32,11 @@ builder.Services.AddScoped<ITrackService, TrackService>();
 builder.Services.AddScoped<ITrackRepository, TrackRepository>();
 builder.Services.AddScoped<IAlbumRepository, AlbumRepository>();
 builder.Services.AddScoped<IAlbumService, AlbumService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IAuthRepository, AuthRepository>();
+builder.Services.AddScoped<IStudioService, StudiosService>();
+builder.Services.AddScoped<IStudioRepository, StudioRepository>();
+builder.Services.AddScoped<IRegistrationResponseFactory, FactoryRegistrationResponse>();
 var app = builder.Build();
 app.UseAuthentication();
 app.UseAuthorization();

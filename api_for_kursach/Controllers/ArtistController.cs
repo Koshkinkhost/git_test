@@ -14,8 +14,14 @@ namespace api_for_kursach.Controllers
         {
             artistService = service;
         }
+        public async Task<IActionResult> GetAllArtists()
+        {
+            var r=await artistService.AllArtists();
+            return Ok(r);
+
+        }
         [HttpPost]
-        public async  Task< IActionResult> GetTracks([FromBody] ArtistDTO art)
+        public async  Task< IActionResult> GetTracksArtist([FromBody] ArtistDTO art)
         {
             await Console.Out.WriteLineAsync(art.name);
             try

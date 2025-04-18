@@ -33,7 +33,11 @@ namespace api_for_kursach.Controllers
             return Ok();
         }
         // GET: TrackController
-
+        [HttpGet]
+        public async Task<IActionResult> GetTopTracks(int n)
+        {
+            return Ok(await _trackService.GetTopTracksAsync(n));
+        }
         public ActionResult Index()
         {
             return View();

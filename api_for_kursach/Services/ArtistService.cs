@@ -7,7 +7,7 @@ namespace api_for_kursach.Services
     {
         Task<Artist> GetArtistByIdAsync(int id); // Получить артиста по ID
 
-
+        Task<List<ArtistDTO>> AllArtists();
         Task<IEnumerable<ArtistAlbumDTO>> GetArtistAlbumsAsync(ArtistDTO id); // Получить альбомы артиста
         Task<TracksDTO> GetArtistTracksAsync(ArtistDTO artist); // Получить треки артиста
         Task<IEnumerable<Artist>> GetSimilarArtistsAsync(int id); // Получить похожих артистов
@@ -20,6 +20,12 @@ namespace api_for_kursach.Services
         {
             _artistRep = artistRespository;
         }
+
+        public async Task<List<ArtistDTO>> AllArtists()
+        {
+            return await _artistRep.GetAll();
+        }
+
         public async Task<IEnumerable<ArtistAlbumDTO>> GetArtistAlbumsAsync(ArtistDTO art)
         {
             return await  _artistRep.GetArtistAlbumsAsync(art);
@@ -31,20 +37,14 @@ namespace api_for_kursach.Services
             throw new NotImplementedException();
         }
 
-        public async Task<TracksDTO> GetArtistTracksAsync(ArtistDTO art)
+        public Task<TracksDTO> GetArtistTracksAsync(ArtistDTO artist)
         {
-           
-                return await _artistRep.GetArtistTracksByUserNameAsync(art);
-
-            
-
-
+            throw new NotImplementedException();
         }
 
         public Task<IEnumerable<Artist>> GetSimilarArtistsAsync(int id)
         {
             throw new NotImplementedException();
         }
-
     }
 }

@@ -9,7 +9,7 @@ namespace api_for_kursach.Repositories
     public interface IAristRepository
     {
 
-
+        Task<List<ArtistDTO>> GetAll();
         Task<IEnumerable<ArtistAlbumDTO>> GetArtistAlbumsAsync(ArtistDTO id); // Получить альбомы артиста
         Task<TracksDTO> GetArtistTracksByUserNameAsync(ArtistDTO username); // Получить треки артиста
         Task<IEnumerable<Artist>> GetSimilarArtistsAsync(int id); // Получить похожих артистов
@@ -19,6 +19,16 @@ namespace api_for_kursach.Repositories
     {
         private readonly MusicLabelContext _context;
         public ArtistRepository(MusicLabelContext context) { _context = context; }
+
+        public async Task<List<ArtistDTO>> GetAll()
+        {
+            return await _context.Artists.Select(t => new ArtistDTO
+            {
+                Id = t.ArtistId,
+                name = t.Name
+            }).ToListAsync();
+        }
+
         public async Task<IEnumerable<ArtistAlbumDTO>> GetArtistAlbumsAsync(ArtistDTO art)
         {
             await Console.Out.WriteLineAsync(art.name.ToString());

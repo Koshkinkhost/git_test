@@ -11,6 +11,7 @@ namespace api_for_kursach.Controllers
         {
             return View();
         }
+       
 
         // GET: NewsController/Details/5
         public ActionResult Details(int id)

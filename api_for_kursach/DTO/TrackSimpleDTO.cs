@@ -7,5 +7,6 @@
         public int AlbumId {  get; set; }
         public string Track_Artist {  get; set; }
         public string Genre_track {  get; set; }
+        public int Listeners_count {  get; set; }
     }
 }

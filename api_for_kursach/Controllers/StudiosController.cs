@@ -3,11 +3,14 @@ using Microsoft.AspNetCore.Mvc;
 using api_for_kursach.ViewModels;
 
 using Microsoft.EntityFrameworkCore;
+using api_for_kursach.Services;
 namespace api_for_kursach.Controllers
 {
-    public class StudiosController() : Controller
+    public class StudiosController(IStudioService _studioService) : Controller
     {
-        [HttpPost]
+       
+       
+        //[HttpPost]
         //public async Task<IActionResult> AddStudio([FromBody] StudioViewModel studio)
         //{
         //    if (ModelState.IsValid)
@@ -48,6 +51,11 @@ namespace api_for_kursach.Controllers
         public ActionResult Details(int id)
         {
             return View();
+        }
+        [HttpGet]
+        public async Task<IActionResult> GetAllStudios()
+        {
+            return Ok( await _studioService.GetAllStudiosAsync());
         }
 
         // GET: StudiosController/Create

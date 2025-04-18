@@ -30,7 +30,9 @@ namespace api_for_kursach.Repositories
                 TrackId = t.TrackId,
                 Title = t.Title,
                 Track_Artist=t.Artist.Name,
-               Genre_track=t.Genre.GenreName
+               Genre_track=t.Genre.GenreName,
+               Listeners_count=t.PlaysCount
+              
             }).ToListAsync();
             
         }
@@ -44,7 +46,8 @@ namespace api_for_kursach.Repositories
                 TrackId = t.TrackId,
                 Title = t.Title,
                 Track_Artist = t.Artist.Name,
-                Genre_track = t.Genre.GenreName
+                Genre_track = t.Genre.GenreName,
+                Listeners_count= t.PlaysCount
             }).ToListAsync();
 
         }
