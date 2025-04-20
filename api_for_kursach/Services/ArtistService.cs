@@ -37,9 +37,13 @@ namespace api_for_kursach.Services
             throw new NotImplementedException();
         }
 
-        public Task<TracksDTO> GetArtistTracksAsync(ArtistDTO artist)
+        public async Task<TracksDTO> GetArtistTracksAsync(ArtistDTO artist)
         {
-            throw new NotImplementedException();
+            if (artist.Id > 0)
+            {
+                return await _artistRep.GetArtistTracksByUserIdAsync(artist.Id);
+            }
+            return new TracksDTO();
         }
 
         public Task<IEnumerable<Artist>> GetSimilarArtistsAsync(int id)

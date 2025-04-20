@@ -89,9 +89,17 @@ namespace api_for_kursach.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public Task<IEnumerable<TrackSimpleDTO>> SearchTracksByTitleAsync(string title)
+        public async Task<IEnumerable<TrackSimpleDTO>> SearchTracksByTitleAsync(string title)
         {
-            throw new NotImplementedException();
+            return await _context.Tracks.Where(t=>t.Title.Contains(title)).
+                Select(track=>new TrackSimpleDTO
+                {
+                    TrackId = track.TrackId,
+                    Title=track.Title,
+                    Track_Artist = track.Artist.Name,
+                    Genre_track = track.Genre.GenreName
+                }
+                ).ToListAsync();
         }
 
        

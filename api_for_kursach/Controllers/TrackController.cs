@@ -32,6 +32,22 @@ namespace api_for_kursach.Controllers
             await _trackService.IncrementPlayCountAsync(track.TrackId);
             return Ok();
         }
+        [HttpPost]
+        public async Task<IActionResult> GetTracksByTitle([FromBody]TrackSimpleDTO track)
+        {
+            try
+            {
+                return Ok(await _trackService.SearchTracksByTitleAsync(track));
+
+            }
+            catch(InvalidDataException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+
+
+        }
         // GET: TrackController
         [HttpGet]
         public async Task<IActionResult> GetTopTracks(int n)

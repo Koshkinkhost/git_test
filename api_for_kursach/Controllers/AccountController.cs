@@ -39,6 +39,8 @@ namespace api_for_kursach.Controllers
         {
             if (!ModelState.IsValid)
             {
+                
+
                 return _factory.CreateFailureResponse(ModelState.Where(x => x.Value.Errors.Count > 0)
                     .ToDictionary(kvp => kvp.Key, kvp => kvp.Value.Errors.Select(e => e.ErrorMessage).ToArray()));
             }
@@ -49,7 +51,7 @@ namespace api_for_kursach.Controllers
                 return _factory.CreateSuccessResponse(new Dictionary<string, string[]>
                         {
                             { "Status", new[] { "Registration is successful" } }
-                        });
+                        },0);
             }
             catch (Exception ex)
             {
@@ -78,11 +80,11 @@ namespace api_for_kursach.Controllers
             {
                 try
                 {
-                    await _authService.Login(login);
+                    var t=await _authService.Login(login);
                     return _factory.CreateSuccessResponse(new Dictionary<string, string[]>
                             {
                                 { "Status", new[] { "Login is successful" } }
-                            });
+                            },t.Id);
                 }
                 catch (Exception ex)
                 {
@@ -134,7 +136,7 @@ namespace api_for_kursach.Controllers
             return _factory.CreateSuccessResponse(new Dictionary<string, string[]>
             {
                 { "Messages", new[] { "You are admin" } }
-            });
+            },0);
         }
 
         // GET: GetUserRole

@@ -6,7 +6,7 @@ namespace api_for_kursach
     public interface IRegistrationResponseFactory
     {
         RegistrationResponse CreateFailureResponse(Dictionary<string, string[]> messages);
-        RegistrationResponse CreateSuccessResponse(Dictionary<string, string[]> messages);
+        RegistrationResponse CreateSuccessResponse(Dictionary<string, string[]> messages,int id);
     }
     public class FactoryRegistrationResponse:IRegistrationResponseFactory
     {
@@ -15,14 +15,16 @@ namespace api_for_kursach
         {
             return new RegistrationResponse
             {
+                
                 Success = false,
                 messages = messages
             };
         }
-        public RegistrationResponse CreateSuccessResponse(Dictionary<string, string[]> messages)
+        public RegistrationResponse CreateSuccessResponse(Dictionary<string, string[]> messages, int id)
         {
             return new RegistrationResponse
             {
+                Id = id,
                 Success = true,
                 messages = messages
             };

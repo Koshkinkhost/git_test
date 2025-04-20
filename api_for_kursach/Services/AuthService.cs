@@ -1,4 +1,5 @@
-﻿using api_for_kursach.Exceptions;
+﻿using api_for_kursach.DTO;
+using api_for_kursach.Exceptions;
 using api_for_kursach.Models;
 using api_for_kursach.Repositories;
 using api_for_kursach.ViewModels;
@@ -11,7 +12,7 @@ namespace api_for_kursach.Services
 {
     public interface IAuthService
     {
-        Task Login(LoginViewModel loginViewModel);
+        Task<ArtistDTO> Login(LoginViewModel loginViewModel);
         Task Registration(RegistrationRequest model);
         bool CheckAuthAsync();
 
@@ -41,15 +42,16 @@ namespace api_for_kursach.Services
             return false;
         }
 
-        public async Task Login(LoginViewModel model)
+        public async Task<ArtistDTO> Login(LoginViewModel model)
         {
             var user_find =await _userRep.GetUserByLoginAsync(model.Login,model.Role);
             if(user_find is null)
             {
+              
                 throw new UserNotExistException("User is not exist");
             }
             
-            if (model.Role == "artist")
+            if (model.Role == "Artist")
             {
                 var password_checker = new PasswordHasher<User>();
                 var check = password_checker.VerifyHashedPassword(user_find, user_find.PasswordHash, model.Password);
@@ -62,9 +64,12 @@ namespace api_for_kursach.Services
                 var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
                 await _httpContextAccessor.HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
+                return await _authRep.GeId(model.Login);
 
             }
-           
+            throw  new UserNotExistException("Some error");
+
+
 
 
         }

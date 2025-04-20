@@ -11,7 +11,7 @@ namespace api_for_kursach.Repositories
 
         Task<List<ArtistDTO>> GetAll();
         Task<IEnumerable<ArtistAlbumDTO>> GetArtistAlbumsAsync(ArtistDTO id); // Получить альбомы артиста
-        Task<TracksDTO> GetArtistTracksByUserNameAsync(ArtistDTO username); // Получить треки артиста
+        Task<TracksDTO> GetArtistTracksByUserIdAsync(int id); // Получить треки артиста
         Task<IEnumerable<Artist>> GetSimilarArtistsAsync(int id); // Получить похожих артистов
 
     }
@@ -66,20 +66,15 @@ namespace api_for_kursach.Repositories
 
        
 
-        public async Task<TracksDTO> GetArtistTracksByUserNameAsync(ArtistDTO userName)
+        public async Task<TracksDTO> GetArtistTracksByUserIdAsync(int id)
         {
-            // Находим пользователя по имени
-            var user = await _context.Users
-                .Where(u => u.Username == userName.name)
+            // Находим артиста по айди
+            var artist = await _context.Artists
+                .Where(u => u.ArtistId == id)
                 .FirstOrDefaultAsync();
 
             // Если пользователь найден
-            if (user != null)
-            {
-                // Найдем артиста, ассоциированного с этим пользователем
-                var artist = await _context.Artists
-                    .Where(a => a.UserId == user.UserId) // Предполагаем, что у вас есть связь UserId между пользователем и артистом
-                    .FirstOrDefaultAsync();
+           
                 
 
                 // Если артист найден, получаем его треки
@@ -92,14 +87,15 @@ namespace api_for_kursach.Repositories
                            TrackId = t.TrackId,
                            Title = t.Title,
                            Track_Artist=t.Artist.Name,
-                           Genre_track=t.Genre.GenreName
+                           Genre_track=t.Genre.GenreName,
+                           Listeners_count=t.PlaysCount
                            
                        }).ToListAsync();
                     return  new TracksDTO { Tracks =result};
                     // ; // Возвращаем список треков артиста
                 }
                
-            }
+            
             return new TracksDTO { };
 
         }
