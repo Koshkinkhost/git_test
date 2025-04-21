@@ -72,6 +72,65 @@ namespace api_for_kursach.Controllers
                 }
             }
         }
+        [HttpPost]
+        public async Task<RegistrationResponse> LoginAdmin([FromBody] LoginViewModel loginViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var result = await _authService.LoginAdmin(loginViewModel);
+
+                    return _factory.CreateSuccessResponse(
+                        new Dictionary<string, string[]>
+                        {
+                    { "Status", new[] { "Admin login is successful" } }
+                        },
+                        result.Id
+                    );
+                }
+                catch (Exception ex)
+                {
+                    switch (ex)
+                    {
+                        case UserNotExistException:
+                            return _factory.CreateFailureResponse(
+                                new Dictionary<string, string[]>
+                                {
+                            { "Errors", new[] { "Admin login or password is incorrect" } }
+                                });
+
+                        case NoAdminRights:
+                            return _factory.CreateFailureResponse(
+                                new Dictionary<string, string[]>
+                                {
+                            { "Errors", new[] { "You do not have admin rights" } }
+                                });
+
+                        default:
+                            var errors = ModelState
+                                .Where(x => x.Value.Errors.Count > 0)
+                                .ToDictionary(
+                                    kvp => kvp.Key,
+                                    kvp => kvp.Value.Errors.Select(e => e.ErrorMessage).ToArray()
+                                );
+
+                            return _factory.CreateFailureResponse(errors);
+                    }
+                }
+            }
+            else
+            {
+                var errors = ModelState
+                    .Where(x => x.Value.Errors.Count > 0)
+                    .ToDictionary(
+                        kvp => kvp.Key,
+                        kvp => kvp.Value.Errors.Select(e => e.ErrorMessage).ToArray()
+                    );
+
+                return _factory.CreateFailureResponse(errors);
+            }
+        }
 
         [HttpPost]
         public async Task<RegistrationResponse> Login([FromBody] LoginViewModel login)
@@ -150,9 +209,10 @@ namespace api_for_kursach.Controllers
 
         // POST: LogOut
         [HttpPost]
-        public async Task LogOut()
+        public async Task<IActionResult> LogOut()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return Ok("ok");
         }
 
         // GET: CheckAuth

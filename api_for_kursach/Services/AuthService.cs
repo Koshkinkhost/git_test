@@ -13,6 +13,7 @@ namespace api_for_kursach.Services
     public interface IAuthService
     {
         Task<ArtistDTO> Login(LoginViewModel loginViewModel);
+        Task<ArtistDTO> LoginAdmin(LoginViewModel loginViewModel);
         Task Registration(RegistrationRequest model);
         bool CheckAuthAsync();
 
@@ -41,6 +42,48 @@ namespace api_for_kursach.Services
 
             return false;
         }
+        public async Task<ArtistDTO> LoginAdmin(LoginViewModel model)
+        {
+            // Проверяем, что роль действительно "admin"
+            if (model.Role?.ToLower() != "admin")
+                throw new UnauthorizedAccessException("Недопустимая роль для администратора");
+
+            // Получаем пользователя (или админа) по логину и роли
+            var user_find = await _userRep.GetUserByLoginAsync(model.Login, model.Role);
+            if (user_find is null)
+            {
+                throw new UserNotExistException("Администратор не найден");
+            }
+
+            // Прямая проверка пароля (НЕ хешированного)
+            if (user_find.PasswordHash != model.Password)
+            {
+                throw new UnauthorizedAccessException("Неверный пароль администратора");
+            }
+
+            // Устанавливаем куки с ролью "admin"
+            var claims = new List<Claim>
+    {
+        new Claim(ClaimTypes.Name, model.Login),
+        new Claim(ClaimTypes.Role, "admin")
+    };
+
+            var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+
+            await _httpContextAccessor.HttpContext.SignInAsync(
+                CookieAuthenticationDefaults.AuthenticationScheme,
+                new ClaimsPrincipal(claimsIdentity)
+            );
+
+            // Возвращаем либо пустой ArtistDTO, либо создаём отдельный AdminDTO
+            return new ArtistDTO
+            {
+                Id = user_find.UserId,
+                name = user_find.Username
+            };
+        }
+
+
 
         public async Task<ArtistDTO> Login(LoginViewModel model)
         {
@@ -51,8 +94,7 @@ namespace api_for_kursach.Services
                 throw new UserNotExistException("User is not exist");
             }
             
-            if (model.Role == "Artist")
-            {
+         
                 var password_checker = new PasswordHasher<User>();
                 var check = password_checker.VerifyHashedPassword(user_find, user_find.PasswordHash, model.Password);
                 var claims = new List<Claim>
@@ -66,13 +108,16 @@ namespace api_for_kursach.Services
                 await _httpContextAccessor.HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
                 return await _authRep.GeId(model.Login);
 
-            }
+            
             throw  new UserNotExistException("Some error");
 
 
 
 
         }
+
+        
+
         public async Task Registration(RegistrationRequest model)
         {
             var user_find=await _userRep.GetUserByLoginAsync(model.Login);

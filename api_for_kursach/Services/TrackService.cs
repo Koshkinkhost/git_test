@@ -10,6 +10,7 @@ namespace api_for_kursach.Services
         Task<IEnumerable<TrackSimpleDTO>> GetAllTracksAsync();
         Task<IEnumerable<TrackSimpleDTO>> GetTracksByAlbumIdAsync(AlbumDTO album);
         Task IncrementPlayCountAsync(int trackId);
+        Task<bool> UpdateTrack(TrackUpdatedDTO track);
         Task<IEnumerable<TrackSimpleDTO>> SearchTracksByTitleAsync(TrackSimpleDTO track);
         Task<IEnumerable<TrackSimpleDTO>> GetTopTracksAsync(int topN);
     }
@@ -65,6 +66,16 @@ namespace api_for_kursach.Services
                  return await _rep_track.SearchTracksByTitleAsync(track.Title);
             }
             throw new InvalidDataException("Track is empty");
+        }
+
+        public async Task<bool> UpdateTrack(TrackUpdatedDTO track)
+        {
+           if(track.TrackId>0 && !String.IsNullOrEmpty(track.Title))
+            {
+
+                return await _rep_track.UpdateTrackAsync(track.TrackId, track);
+            }
+            return false;
         }
     }
 }

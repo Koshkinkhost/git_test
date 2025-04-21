@@ -48,6 +48,11 @@ namespace api_for_kursach.Controllers
 
 
         }
+        [HttpPost]
+        public async Task<IActionResult> UpdateTrack([FromBody]TrackUpdatedDTO track)
+        {
+            return Ok(await _trackService.UpdateTrack(track));
+        }
         // GET: TrackController
         [HttpGet]
         public async Task<IActionResult> GetTopTracks(int n)

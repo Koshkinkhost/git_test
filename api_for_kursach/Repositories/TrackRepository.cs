@@ -7,6 +7,9 @@ namespace api_for_kursach.Repositories
 {
     public interface ITrackRepository
     {
+        Task<bool> UpdateTrackAsync(int id, TrackUpdatedDTO updatedTrack);
+        Task<bool> DeleteTrackAsync(int id);
+
         Task<IEnumerable<TrackSimpleDTO>> GetAllTracksAsync();
         Task<TrackSimpleDTO> GetTrackByIdAsync(int id);
         Task<IEnumerable<TrackSimpleDTO>> GetTracksByAlbumIdAsync(string album);
@@ -31,7 +34,8 @@ namespace api_for_kursach.Repositories
                 Title = t.Title,
                 Track_Artist=t.Artist.Name,
                Genre_track=t.Genre.GenreName,
-               Listeners_count=t.PlaysCount
+               Listeners_count=t.PlaysCount,
+               AlbumId=t.AlbumId,
               
             }).ToListAsync();
             
@@ -97,11 +101,46 @@ namespace api_for_kursach.Repositories
                     TrackId = track.TrackId,
                     Title=track.Title,
                     Track_Artist = track.Artist.Name,
-                    Genre_track = track.Genre.GenreName
+                    Genre_track = track.Genre.GenreName,
+                    Listeners_count=track.PlaysCount
+                    
                 }
                 ).ToListAsync();
         }
+        public async Task<bool> UpdateTrackAsync(int id,TrackUpdatedDTO dto)
+        {
+            var track = await _context.Tracks.FirstOrDefaultAsync(t => t.TrackId == dto.TrackId);
+            if (track == null)
+                return false;
 
-       
+            // Найти жанр по названию
+            var genre = await _context.Genres.FirstOrDefaultAsync(g => g.GenreName == dto.GenreName);
+            if (genre == null)
+                return false; // Можно вернуть ошибку или создать жанр, если надо
+
+            // Обновить поля
+            track.Title = dto.Title;
+            track.GenreId = genre.GenreId;
+            
+            // Можно также обновить артиста, если нужно
+
+            await _context.SaveChangesAsync();
+            return true;
+        }
+
+
+        public async Task<bool> DeleteTrackAsync(int id)
+        {
+            var track = await _context.Tracks.FirstOrDefaultAsync(t => t.TrackId == id);
+            if (track == null)
+                return false;
+
+            _context.Tracks.Remove(track);
+            await _context.SaveChangesAsync();
+            return true;
+        }
+
+
+
     }
 }
