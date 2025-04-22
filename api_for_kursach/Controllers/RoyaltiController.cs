@@ -1,41 +1,40 @@
-﻿
+﻿using api_for_kursach.DTO;
+using api_for_kursach.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using api_for_kursach.ViewModels;
-using api_for_kursach.Services;
+
 namespace api_for_kursach.Controllers
 {
-    public class NewsController(INewsService newsService) : Controller
+    public class RoyaltiController : Controller
     {
-        
-        // GET: NewsController
+        private readonly IRoyaltyService _royaltyService;
+        public RoyaltiController(IRoyaltyService royaltyService)
+        {
+            _royaltyService = royaltyService;
+        }
+        // GET: RoyaltiController
         public ActionResult Index()
         {
             return View();
         }
-        [HttpGet]
-        public async Task<IActionResult> GetNews()
+        [HttpPost]
+        public async Task<IActionResult> GetTotalMoney(ArtistDTO artist)
         {
-            return Ok(await newsService.GetAllNews());
+            return Ok(await _royaltyService.GetTotalMoney(artist));
         }
-
-        // GET: NewsController/Details/5
+        // GET: RoyaltiController/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
-        [HttpGet]
-       
-       
-     
 
-        // GET: NewsController/Create
+        // GET: RoyaltiController/Create
         public ActionResult Create()
         {
             return View();
         }
-       
-        // POST: NewsController/Create
+
+        // POST: RoyaltiController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
@@ -50,13 +49,13 @@ namespace api_for_kursach.Controllers
             }
         }
 
-        // GET: NewsController/Edit/5
+        // GET: RoyaltiController/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: NewsController/Edit/5
+        // POST: RoyaltiController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
@@ -71,13 +70,13 @@ namespace api_for_kursach.Controllers
             }
         }
 
-        // GET: NewsController/Delete/5
+        // GET: RoyaltiController/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: NewsController/Delete/5
+        // POST: RoyaltiController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)
