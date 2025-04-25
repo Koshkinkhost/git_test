@@ -1,6 +1,7 @@
 ﻿using api_for_kursach.DTO;
 using api_for_kursach.Models;
 using api_for_kursach.Services;
+using api_for_kursach.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -53,6 +54,12 @@ namespace api_for_kursach.Controllers
         {
             return Ok(await _trackService.UpdateTrack(track));
         }
+        [HttpPost]
+        public async Task<IActionResult> AddTrack([FromBody] TrackViewModel track)
+        {
+            return Ok(await _trackService.AddTrackByUserId(track));
+        }
+
         // GET: TrackController
         [HttpGet]
         public async Task<IActionResult> GetTopTracks(int n)

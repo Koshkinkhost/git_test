@@ -1,7 +1,9 @@
 ﻿using api_for_kursach.DTO;
 using api_for_kursach.Models;
+using api_for_kursach.ViewModels;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection.Metadata.Ecma335;
 
 namespace api_for_kursach.Repositories
 {
@@ -9,6 +11,7 @@ namespace api_for_kursach.Repositories
     {
         Task<bool> UpdateTrackAsync(int id, TrackUpdatedDTO updatedTrack);
         Task<bool> DeleteTrackAsync(int id);
+        Task CreateTrackByUserIdAsync(TrackViewModel track);
 
         Task<IEnumerable<TrackSimpleDTO>> GetAllTracksAsync();
         Task<TrackSimpleDTO> GetTrackByIdAsync(int id);
@@ -140,7 +143,12 @@ namespace api_for_kursach.Repositories
             return true;
         }
 
-
-
+        public async Task CreateTrackByUserIdAsync(TrackViewModel track)
+        {
+            var genre = await _context.Genres.FirstOrDefaultAsync(r => r.GenreName == track.Genre_track);
+           await  _context.Tracks.AddAsync(new Track() { ArtistId = track.ArtistId, Title = track.Title, GenreId = genre.GenreId });
+            _context.SaveChangesAsync();
+            
+        }
     }
 }

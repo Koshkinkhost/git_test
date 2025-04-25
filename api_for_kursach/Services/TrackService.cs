@@ -1,6 +1,7 @@
 ﻿using api_for_kursach.DTO;
 using api_for_kursach.Models;
 using api_for_kursach.Repositories;
+using api_for_kursach.ViewModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace api_for_kursach.Services
@@ -10,6 +11,7 @@ namespace api_for_kursach.Services
         Task<IEnumerable<TrackSimpleDTO>> GetAllTracksAsync();
         Task<IEnumerable<TrackSimpleDTO>> GetTracksByAlbumIdAsync(AlbumDTO album);
         Task IncrementPlayCountAsync(int trackId);
+        Task<bool> AddTrackByUserId(TrackViewModel track);
         Task<bool> UpdateTrack(TrackUpdatedDTO track);
         Task<IEnumerable<TrackSimpleDTO>> SearchTracksByTitleAsync(TrackSimpleDTO track);
         Task<IEnumerable<TrackSimpleDTO>> GetTopTracksAsync(int topN);
@@ -22,6 +24,14 @@ namespace api_for_kursach.Services
         public TrackService(ITrackRepository rep)
         {
             _rep_track = rep;
+        }
+
+        public async Task<bool> AddTrackByUserId(TrackViewModel track)
+        {
+            if(track == null) throw new ArgumentNullException(
+                nameof(track));
+            await _rep_track.CreateTrackByUserIdAsync(track);
+            return true;
         }
 
         public Task<IEnumerable<TrackSimpleDTO>> GetAllTracksAsync()
