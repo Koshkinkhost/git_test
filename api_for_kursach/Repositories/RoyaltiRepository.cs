@@ -7,7 +7,7 @@ namespace api_for_kursach.Repositories
     public interface IRoyaltiRepository
     {
         Task<decimal> GetTotalEarningsByArtist(int artistId);
-        Dictionary<int, decimal> GetEarningsByTrackForArtist(int artistId);
+        Task<Dictionary<string, decimal>> GetEarningsByTrackForArtist(int artistId);
     }
     public class RoyaltiRepository : IRoyaltiRepository
     {
@@ -16,9 +16,16 @@ namespace api_for_kursach.Repositories
         {
             _musicLabelContext= musicLabelContext;
         }
-        public Dictionary<int, decimal> GetEarningsByTrackForArtist(int artistId)
+        public async Task<Dictionary<string, decimal>> GetEarningsByTrackForArtist(int artistId)
         {
-            throw new NotImplementedException();
+           return await _musicLabelContext.Tracks
+        .Where(t => t.ArtistId == artistId)
+        .Select(t => new
+        {
+            t.Title,
+            total = t.PlaysCount * t.Royalties.Sum(r => r.Amount)
+        })
+        .ToDictionaryAsync(x => x.Title, x => x.total);
         }
 
         public async Task<decimal> GetTotalEarningsByArtist(int artistId)

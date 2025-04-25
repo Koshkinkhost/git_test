@@ -6,6 +6,7 @@ namespace api_for_kursach.Services
     public interface IRoyaltyService
     {
         Task<decimal> GetTotalMoney(ArtistDTO artist);
+        Task<Dictionary<string, decimal>> GetTrackMoney(ArtistDTO artist);
     }
     public class RoyaltyService : IRoyaltyService
     {
@@ -18,6 +19,11 @@ namespace api_for_kursach.Services
         public async Task<decimal> GetTotalMoney(ArtistDTO artist)
         {
            return await  _royal_rep.GetTotalEarningsByArtist(artist.Id);
+        }
+
+        public async Task<Dictionary<string, decimal>> GetTrackMoney(ArtistDTO artist)
+        {
+            return await _royal_rep.GetEarningsByTrackForArtist(artist.Id);
         }
     }
 }

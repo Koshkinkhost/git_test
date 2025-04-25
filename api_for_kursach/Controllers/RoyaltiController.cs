@@ -18,9 +18,14 @@ namespace api_for_kursach.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> GetTotalMoney(ArtistDTO artist)
+        public async Task<IActionResult> GetTotalMoney([FromBody]ArtistDTO artist)
         {
             return Ok(await _royaltyService.GetTotalMoney(artist));
+        }
+        [HttpPost]
+        public async Task<IActionResult> GetTracksRoyalti([FromBody]ArtistDTO artist)
+        {
+            return Ok(await _royaltyService.GetTrackMoney(artist));
         }
         // GET: RoyaltiController/Details/5
         public ActionResult Details(int id)
