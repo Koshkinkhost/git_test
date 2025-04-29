@@ -16,6 +16,7 @@ public partial class Track
     public int? Duration { get; set; }
 
     public int? GenreId { get; set; }
+    public string AudioUrl {  get; set; }
 
     public int PlaysCount { get; set; }
 

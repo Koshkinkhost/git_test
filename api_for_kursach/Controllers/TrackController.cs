@@ -4,15 +4,19 @@ using api_for_kursach.Services;
 using api_for_kursach.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 
 namespace api_for_kursach.Controllers
 {
     public class TrackController : Controller
     {
         private readonly ITrackService _trackService;
-        public TrackController(ITrackService trackService)
+        private readonly MusicLabelContext _context;
+        public TrackController(ITrackService trackService,MusicLabelContext context)
         {
             _trackService = trackService;
+            _context = context;
         }
 
         [HttpGet]
@@ -55,11 +59,54 @@ namespace api_for_kursach.Controllers
             return Ok(await _trackService.UpdateTrack(track));
         }
         [HttpPost]
-        public async Task<IActionResult> AddTrack([FromBody] TrackViewModel track)
+        public async Task<IActionResult> UploadTrack([FromForm] string trackData, [FromForm] IFormFile audioFile)
         {
-            return Ok(await _trackService.AddTrackByUserId(track));
-        }
+            if (audioFile == null || audioFile.Length == 0)
+            {
+                return BadRequest("Файл не выбран.");
+            }
 
+            // Десериализуем метаданные трека
+            var trackDto = JsonConvert.DeserializeObject<TrackUploadDTO>(trackData);
+
+            // Генерируем уникальное имя файла
+            var fileName = Guid.NewGuid().ToString() + Path.GetExtension(audioFile.FileName);
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "audio", fileName);
+
+            // Сохраняем файл
+            using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                await audioFile.CopyToAsync(stream);
+            }
+
+            // Формируем URL для доступа к файлу
+            var fileUrl = $"/audio/{fileName}";
+
+            // Создаем сущность трека
+            var track = new Track
+            {
+                ArtistId = trackDto.ArtistId,
+                Title = trackDto.Title,
+                GenreId = await GetGenreIdByName(trackDto.genreTrack),
+                PlaysCount = trackDto.Listeners_count,
+                AudioUrl = fileUrl,
+            };
+
+            // Добавляем трек в базу данных
+            _context.Tracks.Add(track);
+            await _context.SaveChangesAsync();
+
+            return Ok(new { message = "Трек успешно загружен.", url = fileUrl });
+        }
+        public async Task<int> GetGenreIdByName(string genreName)
+        {
+            var genre = await _context.Genres.FirstOrDefaultAsync(g => g.GenreName == genreName);
+            if (genre == null)
+            {
+                throw new InvalidOperationException($"Жанр '{genreName}' не найден в базе данных.");
+            }
+            return genre.GenreId;
+        }
         // GET: TrackController
         [HttpGet]
         public async Task<IActionResult> GetTopTracks(int n)

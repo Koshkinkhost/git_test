@@ -1,4 +1,5 @@
 ﻿using api_for_kursach.DTO;
+using api_for_kursach.Models;
 using api_for_kursach.Repositories;
 using api_for_kursach.Services;
 using Microsoft.AspNetCore.Http;
@@ -17,6 +18,23 @@ namespace api_for_kursach.Controllers
         {
 
             return Ok(await _albumService.GetAlbumWithTracksAsync(album));
+        }
+
+
+        [HttpPost("upload")]
+        public async Task<IActionResult> AddAlbum([FromBody] AlbumDTO album)
+        {
+            try
+            {
+                await _albumService.AddAlbumAsync(album);
+
+            }
+            catch(ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+            return Ok("Success");    
         }
         [HttpGet]
         public async Task<IActionResult> GetAllAlbums(AlbumDTO album)

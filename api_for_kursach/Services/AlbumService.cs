@@ -11,7 +11,7 @@ namespace api_for_kursach.Services
         Task<List<Album>> GetAllAlbumsAsync();
         Task<Album?> GetAlbumByIdAsync(int id);
         Task<List<AlbumTracksDTO?>> GetAlbumWithTracksAsync(AlbumDTO album);
-        Task AddAlbumAsync(Album album);
+        Task AddAlbumAsync(AlbumDTO album);
         Task DeleteAlbumAsync(int id);
     }
 
@@ -39,8 +39,12 @@ namespace api_for_kursach.Services
             return await _albumRepository.GetAlbumWithTracksAsync(album.Id);
         }
 
-        public async Task AddAlbumAsync(Album album)
+        public async Task AddAlbumAsync(AlbumDTO album)
         {
+            if(album.Id == 0 || album.ArtistId==0 || String.IsNullOrEmpty(album.Name))
+            {
+                throw new ArgumentException("Не все данные переданы");
+            }
             await _albumRepository.AddAlbumAsync(album);
         }
 

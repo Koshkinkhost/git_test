@@ -10,7 +10,7 @@ namespace api_for_kursach.Repositories
         Task<List<Album>> GetAllAlbumsAsync();
         Task<Album?> GetAlbumByIdAsync(int id);
         Task<List<AlbumTracksDTO?>> GetAlbumWithTracksAsync(int id);
-        Task AddAlbumAsync(Album album);
+        Task AddAlbumAsync(AlbumDTO album);
         Task DeleteAlbumAsync(int id);
     }
 
@@ -48,11 +48,55 @@ namespace api_for_kursach.Repositories
         }
 
 
-        public async Task AddAlbumAsync(Album album)
+        public async Task AddAlbumAsync(AlbumDTO album)
         {
-            _context.Albums.Add(album);
+            // Проверяем, что объект альбома не null
+            if (album == null)
+            {
+                throw new ArgumentNullException(nameof(album), "Альбом не может быть null.");
+            }
+
+            // Создаем новую сущность альбома и маппим данные из DTO
+            var newAlbum = new Album
+            {
+                ArtistId = album.ArtistId,
+                Title = album.Name,
+                ReleaseDate = DateOnly.FromDateTime(DateTime.UtcNow), // Устанавливаем текущую дату
+                Tracks = new List<Track>() // Инициализируем коллекцию треков
+            };
+
+            // Если есть треки, добавляем их в альбом
+            if (album.Tracks != null && album.Tracks.Any())
+            {
+                foreach (var trackDto in album.Tracks)
+                {
+                    // Находим GenreId по названию жанра
+                    var genre = await _context.Genres.FirstOrDefaultAsync(g => g.GenreName == trackDto.Genre_track);
+                    if (genre == null)
+                    {
+                        throw new InvalidOperationException($"Жанр '{trackDto.Genre_track}' не найден в базе данных.");
+                    }
+
+                    // Создаем новый трек
+                    var track = new Track
+                    {
+                        TrackId = trackDto.TrackId,
+                        ArtistId = trackDto.ArtistId,
+                        Title = trackDto.Title, // Оставляем оригинальное название трека
+                        AlbumId = newAlbum.AlbumId, // Устанавливаем связь с альбомом
+                        GenreId = genre.GenreId, // Устанавливаем GenreId из найденного жанра
+                        PlaysCount = trackDto.Listeners_count
+                    };
+
+                    newAlbum.Tracks.Add(track); // Добавляем трек в коллекцию альбома
+                }
+            }
+
+            // Добавляем альбом в контекст и сохраняем изменения
+            _context.Albums.Add(newAlbum);
             await _context.SaveChangesAsync();
         }
+
 
         public async Task DeleteAlbumAsync(int id)
         {
