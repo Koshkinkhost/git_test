@@ -39,7 +39,7 @@ namespace api_for_kursach.Services
 
         public async Task<TracksDTO> GetArtistTracksAsync(ArtistDTO artist)
         {
-            if (artist.Id > 0)
+            if (artist.Id > 0 && artist is not null)
             {
                 return await _artistRep.GetArtistTracksByUserIdAsync(artist.Id);
             }

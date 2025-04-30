@@ -30,6 +30,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 app.UseMiddleware<MiddleWareLog>();
 
+app.UseStaticFiles(); 
 
 app.MapControllerRoute(
     name: "default",

@@ -23,7 +23,6 @@ namespace api_for_kursach.Controllers
         [HttpPost]
         public async  Task< IActionResult> GetTracksArtist([FromBody] ArtistDTO art)
         {
-            await Console.Out.WriteLineAsync(art.name);
             try
             {
                 return Ok(await artistService.GetArtistTracksAsync(art));

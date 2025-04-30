@@ -3,6 +3,7 @@ using api_for_kursach.Models;
 using api_for_kursach.ViewModels;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
 using System.Reflection.Metadata.Ecma335;
 
 namespace api_for_kursach.Repositories
@@ -31,17 +32,35 @@ namespace api_for_kursach.Repositories
         }
         public async  Task<IEnumerable<TrackSimpleDTO>> GetAllTracksAsync()
         {
-            return await _context.Tracks.Include(art=>art.Artist).Include(g=>g.Genre).Select(t=>new TrackSimpleDTO
+            var result = await _context.Tracks.Include(art => art.Artist).Include(g => g.Genre).Select(t => new TrackSimpleDTO
             {
                 TrackId = t.TrackId,
                 Title = t.Title,
-                Track_Artist=t.Artist.Name,
-               Genre_track=t.Genre.GenreName,
-               Listeners_count=t.PlaysCount,
-               AlbumId=t.AlbumId,
-              
+                Track_Artist = t.Artist.Name,
+                Genre_track = t.Genre.GenreName,
+                Listeners_count = t.PlaysCount,
+                AlbumId = t.AlbumId,
+                URL = t.AudioUrl ?? null,
+                
+
             }).ToListAsync();
+            foreach(var t in result)
+            {
+                if(t.URL is not null && !String.IsNullOrEmpty(t.URL))
+                {
+                    var relativePath = t.URL.TrimStart('/');
+                    var filePath = Path.Combine("wwwroot", relativePath);
+                    if (System.IO.File.Exists(filePath)) // Проверяем существование файла
+                    {
+                        var fileBytes = await System.IO.File.ReadAllBytesAsync(filePath);
+                        t.FileBase64 = Convert.ToBase64String(fileBytes); // Преобразуем файл в Base64
+                    }
+                }
+            }
+            return result;
+
             
+
         }
 
         public async  Task<IEnumerable<TrackSimpleDTO>> GetTopTracksAsync(int topN)
