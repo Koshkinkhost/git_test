@@ -78,6 +78,7 @@ namespace api_for_kursach.Repositories
 
         }
 
+
         public async Task<TrackSimpleDTO> GetTrackByIdAsync(int id)
         {
             var result=await _context.Tracks.FirstOrDefaultAsync(t=>t.TrackId==id);
@@ -117,17 +118,39 @@ namespace api_for_kursach.Repositories
 
         public async Task<IEnumerable<TrackSimpleDTO>> SearchTracksByTitleAsync(string title)
         {
-            return await _context.Tracks.Where(t=>t.Title.Contains(title)).
-                Select(track=>new TrackSimpleDTO
+            // Получаем треки, соответствующие запросу по названию
+            var tracks = await _context.Tracks
+                .Include(t => t.Artist)
+                .Include(t => t.Genre)
+                .Where(t => t.Title.Contains(title))
+                .Select(track => new TrackSimpleDTO
                 {
                     TrackId = track.TrackId,
-                    Title=track.Title,
+                    Title = track.Title,
                     Track_Artist = track.Artist.Name,
                     Genre_track = track.Genre.GenreName,
-                    Listeners_count=track.PlaysCount
-                    
+                    Listeners_count = track.PlaysCount,
+                    URL = track.AudioUrl ?? null
+                })
+                .ToListAsync();
+
+            // Добавляем файлы (в Base64) для каждого трека, если URL существует
+            foreach (var track in tracks)
+            {
+                if (track.URL is not null && !String.IsNullOrEmpty(track.URL))
+                {
+                    var relativePath = track.URL.TrimStart('/');
+                    var filePath = Path.Combine("wwwroot", relativePath);
+
+                    if (System.IO.File.Exists(filePath)) // Проверяем существование файла
+                    {
+                        var fileBytes = await System.IO.File.ReadAllBytesAsync(filePath);
+                        track.FileBase64 = Convert.ToBase64String(fileBytes); // Преобразуем файл в Base64
+                    }
                 }
-                ).ToListAsync();
+            }
+
+            return tracks;
         }
         public async Task<bool> UpdateTrackAsync(int id,TrackUpdatedDTO dto)
         {

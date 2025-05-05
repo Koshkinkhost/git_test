@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "lE1R5iF5vu3GvVePWxWaDBwgJZ6C9wDPuZp45i+yylU=",
+  "Hash": "UGIgpWNA3VZz2thLgBtGap+TX0sW74318aH0o5+5tKA=",
   "Source": "api_for_kursach",
   "BasePath": "_content/api_for_kursach",
   "Mode": "Default",
@@ -91,6 +91,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\audio\\8240d3fd-bea8-4e6c-9de0-a56f548c6f71.mp3"
+    },
+    {
+      "Identity": "C:\\Users\\boris\\OneDrive\\Рабочий стол\\diplom_server\\git_test\\api_for_kursach\\wwwroot\\audio\\8dcc9346-4522-4f85-aa11-bd8536ce45da.mp3",
+      "SourceId": "api_for_kursach",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\boris\\OneDrive\\Рабочий стол\\diplom_server\\git_test\\api_for_kursach\\wwwroot\\",
+      "BasePath": "_content/api_for_kursach",
+      "RelativePath": "audio/8dcc9346-4522-4f85-aa11-bd8536ce45da.mp3",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\audio\\8dcc9346-4522-4f85-aa11-bd8536ce45da.mp3"
     },
     {
       "Identity": "C:\\Users\\boris\\OneDrive\\Рабочий стол\\diplom_server\\git_test\\api_for_kursach\\wwwroot\\audio\\91c2d199-7c10-41c8-9078-c27c115339a7.mp3",
@@ -224,6 +243,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\audio\\e7b43701-0aa8-4703-87ee-b17923be430b.mp3"
+    },
+    {
+      "Identity": "C:\\Users\\boris\\OneDrive\\Рабочий стол\\diplom_server\\git_test\\api_for_kursach\\wwwroot\\audio\\ec154ca9-32cc-496a-810e-0478a36ed083.mp3",
+      "SourceId": "api_for_kursach",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\boris\\OneDrive\\Рабочий стол\\diplom_server\\git_test\\api_for_kursach\\wwwroot\\",
+      "BasePath": "_content/api_for_kursach",
+      "RelativePath": "audio/ec154ca9-32cc-496a-810e-0478a36ed083.mp3",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\audio\\ec154ca9-32cc-496a-810e-0478a36ed083.mp3"
     },
     {
       "Identity": "C:\\Users\\boris\\OneDrive\\Рабочий стол\\diplom_server\\git_test\\api_for_kursach\\wwwroot\\audio\\ff94950e-9777-4979-a1d7-019fa83151aa.mp3",

@@ -30,7 +30,11 @@ namespace api_for_kursach
             services.AddScoped<IRoyaltiRepository, RoyaltiRepository>();
             services.AddScoped<IRoyaltyService, RoyaltyService>();
 
+            services.AddScoped<IRadioService, RadioService>();
+            services.AddScoped<IRadioRepository, RadioRepository>();
+
             services.AddScoped<IRegistrationResponseFactory, FactoryRegistrationResponse>();
+
 
             return services;
         }

@@ -13,6 +13,7 @@ namespace api_for_kursach.Repositories
         Task<IEnumerable<ArtistAlbumDTO>> GetArtistAlbumsAsync(ArtistDTO id); // Получить альбомы артиста
         Task<TracksDTO> GetArtistTracksByUserIdAsync(int id); // Получить треки артиста
         Task<IEnumerable<Artist>> GetSimilarArtistsAsync(int id); // Получить похожих артистов
+        Task<List<RotationApplicationDTO>> GetRotationApplicationsByArtistId(int id);
 
     }
     public class ArtistRepository : IAristRepository
@@ -27,6 +28,25 @@ namespace api_for_kursach.Repositories
                 Id = t.ArtistId,
                 name = t.Name
             }).ToListAsync();
+        }
+        public async Task<List<RotationApplicationDTO>> GetRotationApplicationsByArtistId(int artistId)
+        {
+            var rotationApplications = await _context.RotationApplications
+                .Where(ra => ra.Track.ArtistId == artistId) // Assuming Track has a relationship with Artist
+                .Select(ra => new RotationApplicationDTO
+                {
+                    ApplicationId = ra.ApplicationId,
+                    TrackTitle = ra.Track.Title, // Assuming Track has a Title property
+                    ArtistName = ra.Track.Artist.Name, // Assuming Artist has a Name property
+                    RadioStationName = ra.RadioStation.Name, // Assuming RadioStation has a Name property
+                    Status = ra.Status,
+                    ApplicationDate = ra.ApplicationDate,
+                    ReviewDate = ra.ReviewDate,
+                    Notes = ra.Notes
+                })
+                .ToListAsync();
+
+            return rotationApplications;
         }
 
         public async Task<IEnumerable<ArtistAlbumDTO>> GetArtistAlbumsAsync(ArtistDTO art)

@@ -11,6 +11,7 @@ namespace api_for_kursach.Services
         Task<IEnumerable<ArtistAlbumDTO>> GetArtistAlbumsAsync(ArtistDTO id); // Получить альбомы артиста
         Task<TracksDTO> GetArtistTracksAsync(ArtistDTO artist); // Получить треки артиста
         Task<IEnumerable<Artist>> GetSimilarArtistsAsync(int id); // Получить похожих артистов
+        Task<List<RotationApplicationDTO>> GetRotationApplicationsByArtistId(ArtistDTO artist);
     }
 
     public class ArtistService : IArtistService
@@ -44,6 +45,11 @@ namespace api_for_kursach.Services
                 return await _artistRep.GetArtistTracksByUserIdAsync(artist.Id);
             }
             return new TracksDTO();
+        }
+
+        public Task<List<RotationApplicationDTO>> GetRotationApplicationsByArtistId(ArtistDTO artist)
+        {
+            return _artistRep.GetRotationApplicationsByArtistId(artist.Id);
         }
 
         public Task<IEnumerable<Artist>> GetSimilarArtistsAsync(int id)

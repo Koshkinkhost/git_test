@@ -47,6 +47,13 @@ namespace api_for_kursach.Controllers
             return View();
         }
 
+        [HttpPost]
+        public async Task<IActionResult> GetRotations([FromBody] ArtistDTO art)
+        {
+            return Ok(await artistService.GetRotationApplicationsByArtistId(art));
+        }
+
+
         // GET: ArtistController/Details/5
         public ActionResult Details(int id)
         {
