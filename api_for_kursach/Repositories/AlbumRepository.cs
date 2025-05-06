@@ -7,7 +7,7 @@ namespace api_for_kursach.Repositories
 {
     public interface IAlbumRepository
     {
-        Task<List<Album>> GetAllAlbumsAsync();
+        Task<List<AlbumDTO_find>> GetAllAlbumsAsync();
         Task<Album?> GetAlbumByIdAsync(int id);
         Task<List<AlbumTracksDTO?>> GetAlbumWithTracksAsync(int id);
         Task AddAlbumAsync(AlbumDTO album);
@@ -23,11 +23,23 @@ namespace api_for_kursach.Repositories
             _context = context;
         }
 
-        public async Task<List<Album>> GetAllAlbumsAsync()
+        public async Task<List<AlbumDTO_find>> GetAllAlbumsAsync()
         {
             return await _context.Albums
+                .Include(a => a.Artist) // Включаем информацию о артисте
+                .Include(a => a.Tracks)  // Включаем треки, чтобы посчитать общее количество прослушиваний
+                .Select(a => new AlbumDTO_find
+                {
+                    AlbumId = a.AlbumId,
+                    ArtistId = a.ArtistId,
+                    ArtistName = a.Artist.Name,
+                    Album_title=a.Title,
+                    genre_name=a.Tracks.FirstOrDefault().Genre.GenreName,
+                    TotalPlays = a.Tracks.Sum(t => t.PlaysCount) // Суммируем количество прослушиваний всех треков альбома
+                })
                 .ToListAsync();
         }
+
 
         public async Task<Album?> GetAlbumByIdAsync(int id)
         {
