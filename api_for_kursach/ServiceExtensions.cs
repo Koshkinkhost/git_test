@@ -34,6 +34,8 @@ namespace api_for_kursach
             services.AddScoped<IRadioRepository, RadioRepository>();
 
             services.AddScoped<IRegistrationResponseFactory, FactoryRegistrationResponse>();
+            services.AddScoped<IAdminRepository, AdminRepository>();
+            services.AddScoped<IAdminService, AdminService>();
 
 
             return services;
