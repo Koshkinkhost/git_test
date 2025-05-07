@@ -3,6 +3,8 @@
     public class RotationApplicationDTO
     {
         public object ApplicationId { get; set; }
+        public int TrackId {  get; set; }
+        public int RadioStationId {  get; set; }
         public string TrackTitle { get; set; }
         public string ArtistName { get; set; }
         public string RadioStationName { get; set; }
