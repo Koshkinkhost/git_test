@@ -11,6 +11,7 @@ namespace api_for_kursach.Repositories
         Task<Album?> GetAlbumByIdAsync(int id);
         Task<List<AlbumTracksDTO?>> GetAlbumWithTracksAsync(int id);
         Task AddAlbumAsync(AlbumDTO album);
+        Task<List<TrackSimpleDTO>> GetTracksByAlbumIdAsync(int id);
         Task DeleteAlbumAsync(int id);
     }
 
@@ -118,6 +119,18 @@ namespace api_for_kursach.Repositories
                 _context.Albums.Remove(album);
                 await _context.SaveChangesAsync();
             }
+        }
+
+        public async Task<List<TrackSimpleDTO>> GetTracksByAlbumIdAsync(int id)
+        {
+           return await  _context.Tracks.Where(a=>a.AlbumId== id).Select(u=>new TrackSimpleDTO
+           { 
+               TrackId=u.TrackId,
+               ArtistId=u.ArtistId,
+               Title=u.Title,
+               AlbumId = u.AlbumId,
+
+           }).ToListAsync();
         }
     }
 }

@@ -9,6 +9,7 @@ namespace api_for_kursach.Services
     public interface IAlbumService
     {
         Task<List<AlbumDTO_find>> GetAllAlbumsAsync();
+        Task<List<TrackSimpleDTO>> GetTracksByAlbumIdAsync(AlbumDTO album);
         Task<Album?> GetAlbumByIdAsync(int id);
         Task<List<AlbumTracksDTO?>> GetAlbumWithTracksAsync(AlbumDTO album);
         Task AddAlbumAsync(AlbumDTO album);
@@ -53,6 +54,9 @@ namespace api_for_kursach.Services
             await _albumRepository.DeleteAlbumAsync(id);
         }
 
-        
+        public async Task<List<TrackSimpleDTO>> GetTracksByAlbumIdAsync(AlbumDTO album)
+        {
+            return await _albumRepository.GetTracksByAlbumIdAsync(album.Id);
+        }
     }
 }

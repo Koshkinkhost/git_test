@@ -41,6 +41,12 @@ namespace api_for_kursach.Controllers
         { 
             return Ok(await _albumService.GetAllAlbumsAsync());
         }
+        [HttpPost]
+        public async Task<IActionResult> GetTracksALbum([FromBody]AlbumDTO album)
+        {
+            return Ok(await _albumService.GetTracksByAlbumIdAsync(album));
+        }
+
 
         // GET: AlbumController/Details/5
         public ActionResult Details(int id)
