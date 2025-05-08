@@ -25,12 +25,22 @@ namespace api_for_kursach.Controllers
             
             return Ok(await  _trackService.GetAllTracksAsync());
         }
+
+        [HttpGet]
+        public async Task<IActionResult> GetTracksByStation()
+        {
+          
+            return Ok(await _trackService.GetTracksByRadioStationAsync(1));
+        }
+
         [HttpPost]
         public async Task<IActionResult> GetTracksByAlbum([FromBody]AlbumDTO album)
         {
 
             return Ok(await _trackService.GetTracksByAlbumIdAsync(album));
         }
+
+       
         [HttpPost]
         public async Task<IActionResult> IncrementListens([FromBody]TrackSimpleDTO track)
         {

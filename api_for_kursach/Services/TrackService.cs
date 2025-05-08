@@ -12,6 +12,7 @@ namespace api_for_kursach.Services
         Task<IEnumerable<TrackSimpleDTO>> GetTracksByAlbumIdAsync(AlbumDTO album);
         Task IncrementPlayCountAsync(int trackId);
         Task<bool> AddTrackByUserId(TrackViewModel track);
+        Task<IEnumerable<TrackSimpleDTO>> GetTracksByRadioStationAsync(int radioStationId);
         Task<bool> UpdateTrack(TrackUpdatedDTO track);
         Task<IEnumerable<TrackSimpleDTO>> SearchTracksByTitleAsync(TrackSimpleDTO track);
         Task<IEnumerable<TrackSimpleDTO>> GetTopTracksAsync(int topN);
@@ -55,6 +56,11 @@ namespace api_for_kursach.Services
                 return _rep_track.GetTracksByAlbumIdAsync(album.Name);
             }
             throw new InvalidDataException("отрицательное число");
+        }
+
+        public async Task<IEnumerable<TrackSimpleDTO>> GetTracksByRadioStationAsync(int radioStationId)
+        {
+            return await _rep_track.GetTracksByRadioStationAsync(radioStationId);
         }
 
         public async Task IncrementPlayCountAsync(int trackId)

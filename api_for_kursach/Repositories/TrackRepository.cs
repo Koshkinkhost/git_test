@@ -20,7 +20,9 @@ namespace api_for_kursach.Repositories
         Task IncrementPlayCountAsync(int trackId);
         Task<IEnumerable<TrackSimpleDTO>> SearchTracksByTitleAsync(string title);
         Task<IEnumerable<TrackSimpleDTO>> GetTopTracksAsync(int topN);
-        
+        Task<IEnumerable<TrackSimpleDTO>> GetTracksByRadioStationAsync(int radioStationId);
+
+
 
     }
     public class TrackRepository : ITrackRepository
@@ -30,6 +32,41 @@ namespace api_for_kursach.Repositories
         {
             _context = context;
         }
+        public async Task<IEnumerable<TrackSimpleDTO>> GetTracksByRadioStationAsync(int radioStationId)
+        {
+            var result = await _context.RotationApplications
+                .Where(r => r.RadioStationId == radioStationId) // Фильтруем по радиостанции
+                .Include(r => r.Track) // Включаем треки
+                .ThenInclude(t => t.Artist) // Включаем исполнителей
+                .Include(r => r.Track.Genre) // Включаем жанры
+                .Select(r => new TrackSimpleDTO
+                {
+                    TrackId = r.Track.TrackId,
+                    Title = r.Track.Title,
+                    Track_Artist = r.Track.Artist.Name,
+                    Genre_track = r.Track.Genre.GenreName,
+                    Listeners_count = r.Track.PlaysCount,
+                    AlbumId = r.Track.AlbumId,
+                    URL = r.Track.AudioUrl ?? null,
+                }).ToListAsync();
+
+            foreach (var t in result)
+            {
+                if (t.URL is not null && !String.IsNullOrEmpty(t.URL))
+                {
+                    var relativePath = t.URL.TrimStart('/');
+                    var filePath = Path.Combine("wwwroot", relativePath);
+                    if (System.IO.File.Exists(filePath)) // Проверяем существование файла
+                    {
+                        var fileBytes = await System.IO.File.ReadAllBytesAsync(filePath);
+                        t.FileBase64 = Convert.ToBase64String(fileBytes); // Преобразуем файл в Base64
+                    }
+                }
+            }
+
+            return result;
+        }
+
         public async  Task<IEnumerable<TrackSimpleDTO>> GetAllTracksAsync()
         {
             var result = await _context.Tracks.Include(art => art.Artist).Include(g => g.Genre).Select(t => new TrackSimpleDTO
