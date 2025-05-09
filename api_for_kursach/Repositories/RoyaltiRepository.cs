@@ -33,7 +33,7 @@ namespace api_for_kursach.Repositories
             var total = await (from royalty in _musicLabelContext.Royalties 
                         join tracks in _musicLabelContext.Tracks on
                         royalty.TrackId equals tracks.TrackId
-                        where royalty.AuthorId==tracks.ArtistId
+                        where royalty.AuthorId==artistId
                         select tracks.PlaysCount*royalty.Amount).SumAsync();
             return total;
         }

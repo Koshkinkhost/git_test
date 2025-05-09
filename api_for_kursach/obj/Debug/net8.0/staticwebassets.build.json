@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "ml5OX/a57YaY2WQMu2ezJhoDAr29YYBTwFABn6Tgi1A=",
+  "Hash": "4HNepfzoppEu1sN8Lwf0pSN0s12vQnLAXYbzErkKMLI=",
   "Source": "api_for_kursach",
   "BasePath": "_content/api_for_kursach",
   "Mode": "Default",
@@ -186,6 +186,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\audio\\bd93cf01-67a4-4cb9-87c5-0a1397c89ff6.mp3"
+    },
+    {
+      "Identity": "C:\\Users\\boris\\OneDrive\\Рабочий стол\\diplom_server\\git_test\\api_for_kursach\\wwwroot\\audio\\c81dd92e-602a-4393-90a5-ae05a833ae00.mp3",
+      "SourceId": "api_for_kursach",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\boris\\OneDrive\\Рабочий стол\\diplom_server\\git_test\\api_for_kursach\\wwwroot\\",
+      "BasePath": "_content/api_for_kursach",
+      "RelativePath": "audio/c81dd92e-602a-4393-90a5-ae05a833ae00.mp3",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\audio\\c81dd92e-602a-4393-90a5-ae05a833ae00.mp3"
     },
     {
       "Identity": "C:\\Users\\boris\\OneDrive\\Рабочий стол\\diplom_server\\git_test\\api_for_kursach\\wwwroot\\audio\\d09426f6-f4cc-4922-9ae5-ec8e3e2db103.mp3",

@@ -4,14 +4,17 @@ using api_for_kursach.Repositories;
 using api_for_kursach.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 
 namespace api_for_kursach.Controllers
 {
     public class AlbumController : Controller
     {
         private readonly IAlbumService _albumService;
+        private readonly MusicLabelContext _musicLabelContext;
         
-        public AlbumController(IAlbumService album) { _albumService = album; }
+        public AlbumController(IAlbumService album,MusicLabelContext context) { _albumService = album;_musicLabelContext = context; }
 
         [HttpPost]
         public async Task<IActionResult> AlbumsWIthTracksByAlbumId([FromBody]AlbumDTO album)
@@ -21,21 +24,83 @@ namespace api_for_kursach.Controllers
         }
 
 
-        [HttpPost("upload")]
-        public async Task<IActionResult> AddAlbum([FromBody] AlbumDTO album)
+        [HttpPost("with-tracks")]
+        public async Task<IActionResult> AddAlbumWithTracks([FromForm] string albumData, [FromForm] List<IFormFile> audioFiles)
         {
-            try
+            if (audioFiles == null || audioFiles.Count == 0)
             {
-                await _albumService.AddAlbumAsync(album);
-
-            }
-            catch(ArgumentException ex)
-            {
-                return BadRequest(ex.Message);
+                return BadRequest("Файлы не выбраны.");
             }
 
-            return Ok("Success");    
+            // Десериализуем метаданные альбома
+            var albumDto = JsonConvert.DeserializeObject<TrackAlbumDTO>(albumData);
+
+            // Создаем сущность альбома
+            var album = new Album
+            {
+                Title = albumDto.Title,
+                ReleaseDate = albumDto.ReleaseDate,
+                ArtistId = albumDto.ArtistId,
+                Tracks = new List<Track>()
+            };
+
+            // Обрабатываем каждый трек
+            for (int i = 0; i < audioFiles.Count; i++)
+            {
+                var audioFile = audioFiles[i];
+                var trackDto = albumDto.Tracks[i]; // предполагается, что количество треков и файлов совпадает
+
+                if (audioFile.Length == 0)
+                {
+                    return BadRequest("Один из файлов пуст.");
+                }
+
+                // Генерируем уникальное имя файла
+                var fileName = Guid.NewGuid().ToString() + Path.GetExtension(audioFile.FileName);
+                var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "audio", fileName);
+
+                // Сохраняем файл
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await audioFile.CopyToAsync(stream);
+                }
+
+                // Формируем URL для доступа к файлу
+                var fileUrl = $"/audio/{fileName}";
+
+                // Создаем сущность трека
+                var track = new Track
+                {
+                    ArtistId = albumDto.ArtistId,
+                    Title = trackDto.Title,
+                   
+                    GenreId = await GetGenreIdByName(trackDto.Genre_track),
+                    AudioUrl = fileUrl,
+                    PlaysCount = trackDto.Listeners_count,
+                    Album = album // Связываем трек с альбомом
+                };
+
+                // Добавляем трек в коллекцию альбома
+                album.Tracks.Add(track);
+            }
+
+            // Добавляем альбом в базу данных
+            _musicLabelContext.Albums.Add(album);
+            await _musicLabelContext.SaveChangesAsync();
+
+            return Ok(new { album.AlbumId });
         }
+
+        public async Task<int> GetGenreIdByName(string genreName)
+        {
+            var genre = await _musicLabelContext.Genres.FirstOrDefaultAsync(g => g.GenreName == genreName);
+            if (genre == null)
+            {
+                throw new InvalidOperationException($"Жанр '{genreName}' не найден в базе данных.");
+            }
+            return genre.GenreId;
+        }
+
         [HttpGet]
         public async Task<IActionResult> GetAllAlbums(AlbumDTO album)
         { 
@@ -116,5 +181,12 @@ namespace api_for_kursach.Controllers
                 return View();
             }
         }
+    }
+    public class AlbumUploadDto
+    {
+        public string Title { get; set; }
+        public int Year { get; set; }
+        public int PublisherId { get; set; }
+        
     }
 }
