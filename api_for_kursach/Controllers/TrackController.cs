@@ -106,8 +106,28 @@ namespace api_for_kursach.Controllers
             _context.Tracks.Add(track);
             await _context.SaveChangesAsync();
 
+            // После сохранения получаем TrackID
+            var trackId = track.TrackId;
+
+            // Генерируем случайную сумму выплаты
+            var random = new Random();
+            decimal randomAmount = Math.Round((decimal)(random.NextDouble() * 100 + 10), 2); // от 10 до 110
+
+            // Добавляем запись о роялти (предположим, ArtistId = AuthorId)
+            var royalty = new Royalty
+            {
+                TrackId = trackId,
+                AuthorId = trackDto.ArtistId, // если это автор — иначе нужно получать AuthorID отдельно
+                Amount = randomAmount,
+                PaymentDate = DateOnly.FromDateTime(DateTime.Now)
+            };
+
+            _context.Royalties.Add(royalty);
+            await _context.SaveChangesAsync();
+
             return Ok(new { message = "Трек успешно загружен.", url = fileUrl });
         }
+
         public async Task<int> GetGenreIdByName(string genreName)
         {
             var genre = await _context.Genres.FirstOrDefaultAsync(g => g.GenreName == genreName);
