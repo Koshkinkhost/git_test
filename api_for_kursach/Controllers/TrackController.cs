@@ -36,7 +36,6 @@ namespace api_for_kursach.Controllers
         [HttpPost]
         public async Task<IActionResult> GetTracksByAlbum([FromBody]AlbumDTO album)
         {
-
             return Ok(await _trackService.GetTracksByAlbumIdAsync(album));
         }
 

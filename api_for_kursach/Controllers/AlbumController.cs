@@ -24,7 +24,7 @@ namespace api_for_kursach.Controllers
         }
 
 
-        [HttpPost("with-tracks")]
+        [HttpPost]
         public async Task<IActionResult> AddAlbumWithTracks([FromForm] string albumData, [FromForm] List<IFormFile> audioFiles)
         {
             if (audioFiles == null || audioFiles.Count == 0)
@@ -82,10 +82,30 @@ namespace api_for_kursach.Controllers
 
                 // Добавляем трек в коллекцию альбома
                 album.Tracks.Add(track);
+               
             }
 
             // Добавляем альбом в базу данных
             _musicLabelContext.Albums.Add(album);
+            await _musicLabelContext.SaveChangesAsync(); // теперь у треков есть реальные TrackId
+
+            // После добавления трека — создаём запись о роялти
+            // Теперь можно добавить роялти
+            foreach (var track in album.Tracks)
+            {
+                Random r=new Random();
+                var royalty = new Royalty
+                {
+                    TrackId = track.TrackId,
+                    AuthorId = track.ArtistId,
+                    Amount = r.Next(100,200),
+
+                    PaymentDate = DateOnly.FromDateTime(DateTime.UtcNow)
+                };
+
+                _musicLabelContext.Royalties.Add(royalty);
+            }
+
             await _musicLabelContext.SaveChangesAsync();
 
             return Ok(new { album.AlbumId });
