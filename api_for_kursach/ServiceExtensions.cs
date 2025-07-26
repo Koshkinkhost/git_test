@@ -1,5 +1,6 @@
 ﻿using api_for_kursach.Repositories;
 using api_for_kursach.Services;
+using StackExchange.Redis;
 
 namespace api_for_kursach
 {
@@ -7,6 +8,9 @@ namespace api_for_kursach
     {
         public static IServiceCollection AddServices(this IServiceCollection services)
         {
+           services.AddSingleton<IConnectionMultiplexer>(sp =>
+    ConnectionMultiplexer.Connect("localhost:6379"));
+            services.AddScoped<IRedisService, RedisService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IUserRepository, UserRepository>();
 
@@ -36,6 +40,7 @@ namespace api_for_kursach
             services.AddScoped<IRegistrationResponseFactory, FactoryRegistrationResponse>();
             services.AddScoped<IAdminRepository, AdminRepository>();
             services.AddScoped<IAdminService, AdminService>();
+           
 
 
             return services;

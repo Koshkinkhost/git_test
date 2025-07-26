@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("api_for_kursach")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f169b8bd4b40071b74ddb48fdbb963c332268e23")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cfaa0dafab7148a32baf51499ffb413ca14ca2dd")]
 [assembly: System.Reflection.AssemblyProductAttribute("api_for_kursach")]
 [assembly: System.Reflection.AssemblyTitleAttribute("api_for_kursach")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

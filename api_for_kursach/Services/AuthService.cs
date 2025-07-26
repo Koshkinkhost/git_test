@@ -5,6 +5,7 @@ using api_for_kursach.Repositories;
 using api_for_kursach.ViewModels;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 
@@ -97,6 +98,10 @@ namespace api_for_kursach.Services
          
                 var password_checker = new PasswordHasher<User>();
                 var check = password_checker.VerifyHashedPassword(user_find, user_find.PasswordHash, model.Password);
+            if (check == PasswordVerificationResult.Success)
+            {
+
+
                 var claims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Name, model.Login),
@@ -107,9 +112,11 @@ namespace api_for_kursach.Services
 
                 await _httpContextAccessor.HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
                 return await _authRep.GeId(model.Login);
+            }
+            throw new UserNotExistException("User is not exist or Password is invalid");
 
-            
-            throw  new UserNotExistException("Some error");
+
+
 
 
 

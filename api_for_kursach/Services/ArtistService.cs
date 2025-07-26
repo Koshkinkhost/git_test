@@ -1,6 +1,7 @@
 ﻿using api_for_kursach.Repositories;
 using api_for_kursach.Models;
 using api_for_kursach.DTO;
+using System.Text.Json;
 namespace api_for_kursach.Services
 {
     public interface IArtistService
@@ -16,15 +17,27 @@ namespace api_for_kursach.Services
 
     public class ArtistService : IArtistService
     {
+        private readonly IRedisService _redisService;
         private readonly IAristRepository _artistRep;
-        public ArtistService(IAristRepository artistRespository)
+        public ArtistService(IAristRepository artistRespository, IRedisService redisService)
         {
             _artistRep = artistRespository;
+            _redisService = redisService;
         }
 
         public async Task<List<ArtistDTO>> AllArtists()
         {
-            return await _artistRep.GetAll();
+            var cacheKey = "all_artists";
+            var cachedArtists = await _redisService.GetValueASync(cacheKey);
+            if (cachedArtists is not null)
+            {
+                return JsonSerializer.Deserialize<List<ArtistDTO>>(cachedArtists);
+
+            }
+            var artists = await _artistRep.GetAll();
+            await _redisService.SetValueAsync(cacheKey, JsonSerializer.Serialize(artists), TimeSpan.FromMinutes(5));
+            return artists;
+            //return await _artistRep.GetAll();
         }
 
         public async Task<IEnumerable<ArtistAlbumDTO>> GetArtistAlbumsAsync(ArtistDTO art)

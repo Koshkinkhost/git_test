@@ -27,6 +27,7 @@ namespace api_for_kursach.Controllers
         }
 
         [HttpGet]
+        
         public async Task<IActionResult> GetTracksByStation()
         {
           

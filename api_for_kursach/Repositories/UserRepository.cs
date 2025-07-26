@@ -33,6 +33,7 @@ namespace api_for_kursach.Repositories
         // Получить пользователя по логину, включая роль
         public async Task<User> GetUserByLoginAsync(string login,string role)
         {
+
             return await _context.Users.FirstOrDefaultAsync(u => u.Username == login&&u.Role==role);
         }
         public async Task<User> GetUserByLoginAsync(string login)

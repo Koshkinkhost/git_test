@@ -397,3 +397,8 @@ C:\Users\boris\OneDrive\Рабочий стол\diplom_server\git_test\api_for_k
 C:\Users\boris\OneDrive\Рабочий стол\diplom_server\git_test\api_for_kursach\obj\Debug\net8.0\ref\api_for_kursach.dll
 C:\Users\boris\OneDrive\Рабочий стол\diplom_server\git_test\api_for_kursach\bin\Debug\net8.0\Newtonsoft.Json.dll
 C:\Users\boris\OneDrive\Рабочий стол\diplom_server\git_test\api_for_kursach\bin\Debug\net8.0\api_for_kursach.staticwebassets.runtime.json
+C:\Users\boris\OneDrive\Рабочий стол\diplom_server\git_test\api_for_kursach\bin\Debug\net8.0\Pipelines.Sockets.Unofficial.dll
+C:\Users\boris\OneDrive\Рабочий стол\diplom_server\git_test\api_for_kursach\bin\Debug\net8.0\StackExchange.Redis.dll
+C:\Users\boris\OneDrive\Рабочий стол\diplom_server\git_test\api_for_kursach\bin\Debug\net8.0\Prometheus.NetStandard.dll
+C:\Users\boris\OneDrive\Рабочий стол\diplom_server\git_test\api_for_kursach\bin\Debug\net8.0\Prometheus.AspNetCore.dll
+C:\Users\boris\OneDrive\Рабочий стол\diplom_server\git_test\api_for_kursach\obj\Debug\net8.0\api_for_kursach.MvcApplicationPartsAssemblyInfo.cs

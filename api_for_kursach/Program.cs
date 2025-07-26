@@ -5,7 +5,7 @@ using api_for_kursach.Repositories;
 using api_for_kursach.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
-
+using Prometheus;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddHttpContextAccessor();
@@ -29,7 +29,8 @@ var app = builder.Build();
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseMiddleware<MiddleWareLog>();
-
+app.UseMetricServer("/metrics");
+app.UseHttpMetrics();
 app.UseStaticFiles(); 
 
 app.MapControllerRoute(
